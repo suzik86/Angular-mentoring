@@ -1,0 +1,44 @@
+.course {
+  width: 93%;
+  height: 230px;
+  margin: 0 auto;
+  background-color: white;
+  margin: 40px 60px 40px 20px;
+  overflow: hidden;
+}
+
+h3 {
+  padding: 20px 20px 0 20px;
+  display: inline-block;
+  width: 40%;
+}
+
+.time {
+  display: inline-block;
+}
+
+.edit-btn, .delete-btn {
+  border-radius: 5px;
+  background-color: lightblue;
+}
+
+.edit-btn {
+  margin-right: 30px;
+}
+
+.duration {
+  margin-left: 50px;
+}
+
+.description, .btns {
+  display: inline-block;
+  margin: 0 15px 25px 15px;
+}
+
+.description {
+  width: 75%;
+}
+
+.btns {
+  width: 15%;
+}
