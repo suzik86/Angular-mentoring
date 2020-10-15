@@ -23,10 +23,20 @@
     ],
     "import-spacing": true,
     "indent": [true, "spaces", 4],
+    "ordered-imports": [
+      true,
+      {
+        "import-sources-order": "lowercase-last",
+        "named-imports-order": "lowercase-first"
+      }
+    ],
     "max-classes-per-file": false,
     "max-line-length": [
       true,
-      140
+      {
+        "limit": 140,
+        "ignore-pattern": "^import |^export {(.*?)}"
+    }
     ],
     "member-ordering": [
       true,
@@ -39,6 +49,7 @@
         ]
       }
     ],
+    "newline-before-return": true,
     "no-console": [
       true,
       "debug",
@@ -78,6 +89,7 @@
         "named": "never"
       }
     },
+    "trailing-comma": [true, {"multiline": "always", "singleline": "never"}],
     "typedef": [
       true,
       "call-signature"

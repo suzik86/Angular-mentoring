@@ -8,7 +8,7 @@ describe('CoursesPageTopSectionComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CoursesPageTopSectionComponent ]
+      declarations: [ CoursesPageTopSectionComponent ],
     })
     .compileComponents();
   });

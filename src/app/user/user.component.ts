@@ -4,7 +4,7 @@ import IUser from './user.interface';
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
-  styleUrls: ['./user.component.sass']
+  styleUrls: ['./user.component.sass'],
 })
 export class UserComponent implements IUser {
   id: number;
