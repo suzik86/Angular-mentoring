@@ -9,4 +9,8 @@ export class CoursesPageComponent {
 
   constructor() { }
 
+  loadMore() {
+    console.log("Load more courses");
+  }
+
 }

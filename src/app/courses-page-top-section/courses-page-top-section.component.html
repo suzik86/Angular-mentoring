@@ -1,3 +1,5 @@
-<input class="search-input">
-<button class="search-btn">Search</button>
-<button class="add-btn">+ Add course</button>
+<form [formGroup]="searchForm">
+  <input class="search-input" type="text" formControlName="searchValue">
+  <button class="search-btn" (click)='onClick()'>Search</button>
+  <button class="add-btn">+ Add course</button>
+</form>

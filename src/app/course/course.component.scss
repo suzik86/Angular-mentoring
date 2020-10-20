@@ -1,10 +1,11 @@
 .course {
-  width: 93%;
+  width: 90%;
   height: 230px;
   margin: 0 auto;
   background-color: white;
-  margin: 40px 60px 40px 20px;
+  margin-bottom: 40px;
   overflow: hidden;
+  display: block;
 }
 
 h3 {
@@ -18,8 +19,12 @@ h3 {
 }
 
 .edit-btn, .delete-btn {
+  background-color: #65c9eb;
   border-radius: 5px;
-  background-color: lightblue;
+  border: none;
+  color: white;
+  width: 100px;
+  height: 40px;
 }
 
 .edit-btn {
@@ -40,5 +45,5 @@ h3 {
 }
 
 .btns {
-  width: 15%;
+  width: 20%;
 }
