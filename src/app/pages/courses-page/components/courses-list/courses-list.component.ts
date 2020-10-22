@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import ICourse from '../course/course.interface';
+import Course from '../course/course.types';
 
 @Component({
   selector: 'app-courses-list',
@@ -7,7 +7,7 @@ import ICourse from '../course/course.interface';
   styleUrls: ['./courses-list.component.scss'],
 })
 export class CoursesListComponent implements OnInit {
-  courses: ICourse[] = [
+  courses: Course[] = [
     {
       id: 1,
       title: 'Introduction to Biological Anthropology',
@@ -35,6 +35,10 @@ export class CoursesListComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  onDeleteCourse(id) : void {
+    console.log(id);
   }
 
 }
