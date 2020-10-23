@@ -8,10 +8,7 @@ import { Component } from '@angular/core';
 export class SearchBarComponent {
   searchValue = '';
 
-  constructor() { }
-
   onClick(): void{
     console.log(this.searchValue);
   }
-
 }

@@ -1,6 +1,6 @@
 <ul>
   <li *ngFor="let course of courses">
-    <app-course [course]="course" (deleteCourse) = "onDeleteCourse(course.id)" ></app-course>
+    <app-course [course]="course" (deleteCourse) = "onDeleteCourse($event)" ></app-course>
   </li>
 </ul>
 
