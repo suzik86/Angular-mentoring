@@ -25,6 +25,7 @@ h3 {
   color: white;
   width: 100px;
   height: 40px;
+  margin: 10px;
 }
 
 .edit-btn {
@@ -35,15 +36,21 @@ h3 {
   margin-left: 50px;
 }
 
+.block-wrapper {
+  display: flex;
+}
+
 .description, .btns {
   display: inline-block;
   margin: 15px 15px 25px 15px;
 }
 
-.description {
-  width: 75%;
+.btns {
+  min-width: 260px;
 }
 
-.btns {
-  width: 20%;
+@media screen and (max-width: 1400px) {
+  .btns {
+    min-width: 130px;
+  }
 }

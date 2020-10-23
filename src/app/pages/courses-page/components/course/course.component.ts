@@ -10,13 +10,6 @@ export class CourseComponent {
   @Input() course: Course;
   @Output() deleteCourse = new EventEmitter();
 
-  constructor(
-
-  ) { }
-
-  editCourse() {
-
-  }
-
+  constructor() { }
 
 }

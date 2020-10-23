@@ -4,11 +4,13 @@
     <span>{{course.creationDate}}</span>
     <span class="duration">{{course.duration}}</span>
   </div>
-  <div class="description">
-    {{course.description}}
-  </div>
-  <div class="btns">
-    <button class="edit-btn" (click)="editCourse()">Edit</button>
-    <button class="delete-btn" (click)="deleteCourse.emit()">Delete</button>
+  <div class="block-wrapper">
+    <div class="description">
+      {{course.description}}
+    </div>
+    <div class="btns">
+      <button class="edit-btn">Edit</button>
+      <button class="delete-btn" (click)="deleteCourse.emit()">Delete</button>
+    </div>
   </div>
 </div>

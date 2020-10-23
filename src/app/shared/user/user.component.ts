@@ -11,8 +11,6 @@ export class UserComponent implements User {
   firstName: string;
   lastName: string;
 
-  constructor( ) {
-
-   }
+  constructor() {}
 
 }

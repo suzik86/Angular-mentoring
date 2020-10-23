@@ -1,15 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-actions-panel',
   templateUrl: './actions-panel.component.html',
   styleUrls: ['./actions-panel.component.scss'],
 })
-export class ActionsPanelComponent implements OnInit {
+export class ActionsPanelComponent {
 
   constructor() { }
-
-  ngOnInit(): void {
-  }
 
 }

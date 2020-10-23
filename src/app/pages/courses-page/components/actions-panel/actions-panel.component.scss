@@ -1,6 +1,5 @@
 .add-btn {
   margin-top: 20px;
-  margin-left: 80%;
   background-color: rgb(101, 201, 235);
   border-radius: 5px;
   border: none;
@@ -8,5 +7,8 @@
   width: 200px;
   height: 40px;
   margin-bottom: 40px;
+  display: block;
+  float: right;
+  margin-right: 80px;
 }
 

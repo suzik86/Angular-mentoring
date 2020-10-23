@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import Course from '../course/course.types';
 
 @Component({
@@ -6,7 +6,7 @@ import Course from '../course/course.types';
   templateUrl: './courses-list.component.html',
   styleUrls: ['./courses-list.component.scss'],
 })
-export class CoursesListComponent implements OnInit {
+export class CoursesListComponent {
   courses: Course[] = [
     {
       id: 1,
@@ -34,10 +34,7 @@ export class CoursesListComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit(): void {
-  }
-
-  onDeleteCourse(id) : void {
+  onDeleteCourse(id): void {
     console.log(id);
   }
 
