@@ -1,16 +1,18 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
+import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
-import { CourseComponent } from './course/course.component';
-import { CoursesListComponent } from './courses-list/courses-list.component';
-import { CoursesPageTopSectionComponent } from './courses-page-top-section/courses-page-top-section.component';
-import { CoursesPageComponent } from './courses-page/courses-page.component';
 import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
-import { UserComponent } from './user/user.component';
+import { ActionsPanelComponent } from './pages/courses-page/components/actions-panel/actions-panel.component';
+import { CourseComponent } from './pages/courses-page/components/course/course.component';
+import { CoursesListComponent } from './pages/courses-page/components/courses-list/courses-list.component';
+import { SearchBarComponent } from './pages/courses-page/components/search-bar/search-bar.component';
+import { CoursesPageComponent } from './pages/courses-page/courses-page.component';
+import { UserComponent } from './shared/user/user.component';
 
 @NgModule({
   declarations: [
@@ -20,13 +22,15 @@ import { UserComponent } from './user/user.component';
     BreadcrumbsComponent,
     CoursesListComponent,
     CoursesPageComponent,
-    CoursesPageTopSectionComponent,
+    ActionsPanelComponent,
     CourseComponent,
     UserComponent,
+    SearchBarComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

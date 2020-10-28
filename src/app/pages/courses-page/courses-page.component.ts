@@ -7,6 +7,8 @@ import { Component } from '@angular/core';
 })
 export class CoursesPageComponent {
 
-  constructor() { }
+  loadMore(): void {
+    console.log('Load more courses');
+  }
 
 }

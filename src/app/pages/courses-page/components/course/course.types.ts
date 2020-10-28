@@ -1,4 +1,4 @@
-export  default interface ICourse {
+export  default interface Course {
   id: number;
   title: string;
   creationDate: string;
