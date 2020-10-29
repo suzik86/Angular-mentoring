@@ -22,4 +22,10 @@ describe('SearchBarComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should log message after click', () => {
+    const consoleSpy = spyOn(console, 'log');
+    component.onClick();
+    expect(consoleSpy).toHaveBeenCalled();
+  });
 });

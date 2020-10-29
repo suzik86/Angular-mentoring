@@ -22,4 +22,10 @@ describe('CoursesListComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should log message after click', () => {
+    const consoleSpy = spyOn(console, 'log');
+    component.onDeleteCourse(1);
+    expect(consoleSpy).toHaveBeenCalled();
+  });
 });

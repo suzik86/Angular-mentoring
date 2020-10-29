@@ -22,4 +22,10 @@ describe('CoursesPageComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should log message after click', () => {
+    const consoleSpy = spyOn(console, 'log');
+    component.loadMore();
+    expect(consoleSpy).toHaveBeenCalled();
+  });
 });
