@@ -24,8 +24,6 @@ describe('HeaderComponent', () => {
   });
 
   it('should render site title', () => {
-      const fixture = TestBed.createComponent(HeaderComponent);
-      fixture.detectChanges();
       const compiled = fixture.nativeElement;
       expect(compiled.querySelector('h1').textContent).toEqual('VIDEO COURSE');
     });

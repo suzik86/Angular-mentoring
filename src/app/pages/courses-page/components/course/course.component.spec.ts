@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { By } from '@angular/platform-browser';
 import { CourseComponent } from './course.component';
 import Course from './course.types';
 
+// Test host testing
 describe('CourseComponent', () => {
   let testHostComponent: TestHostComponent;
   let testHostFixture: ComponentFixture<TestHostComponent>;
@@ -22,8 +24,8 @@ describe('CourseComponent', () => {
   });
 
   @Component({
-    selector: `host-component`,
-    template: `<app-course [course]="course"></app-course>`
+    selector: `app-host-component`,
+    template: `<app-course [course]="course"></app-course>`,
   })
   class TestHostComponent implements OnInit{
     course: Course;
@@ -31,7 +33,7 @@ describe('CourseComponent', () => {
     ngOnInit(): void {
       this.course = {
         id: 3,
-        title: 'Ethical, Professional and Legal Standards in Psychology ',
+        title: 'Ethical, Professional and Legal Standards in Psychology',
         creationDate: '12/02/2020',
         duration: '3 weeks',
         description: 'Ethical issues relevant to teaching, research, and application of psychology are reviewed, with an emphasis on the principles of the American Psychological Associations ethics code and related professional standards and guidelines.',
@@ -43,29 +45,61 @@ describe('CourseComponent', () => {
     expect(testHostComponent).toBeTruthy();
   });
 
-  it('raises the deleteCourse event when clicked', () => {
-    const comp = new CourseComponent();
-    const course: Course = {
+  it('should show course title', () => {
+      expect(testHostFixture.nativeElement.querySelector('h3').innerText)
+        .toEqual('Ethical, Professional and Legal Standards in Psychology');
+    });
+});
+
+// Use stand alone testing
+describe('CourseComponent', () => {
+  let component: CourseComponent;
+  let fixture: ComponentFixture<CourseComponent>;
+  let courseDe;
+  let courseEl;
+  let expectedCourse: Course;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      declarations: [ CourseComponent ],
+    })
+    .compileComponents();
+  });
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(CourseComponent);
+    component = fixture.componentInstance;
+    courseDe = fixture.debugElement.query(By.css('.course'));
+    courseEl = courseDe.nativeElement;
+    expectedCourse = {
       id: 3,
-      title: 'Ethical, Professional and Legal Standards in Psychology ',
+      title: 'Ethical, Professional and Legal Standards in Psychology',
       creationDate: '12/02/2020',
       duration: '3 weeks',
       description: 'Ethical issues relevant to teaching, research, and application of psychology are reviewed, with an emphasis on the principles of the American Psychological Associations ethics code and related professional standards and guidelines.',
     };
-    comp.course = course;
-
-    comp.deleteCourse.subscribe((selectedCourse: Course) => expect(selectedCourse).toEqual(course));
-    comp.onClick(course);
+    component.course = expectedCourse;
+    fixture.detectChanges();
   });
 
-  // it('should show TEST INPUT', () => {
-    //   expect(testHostFixture.nativeElement.querySelector('div').innerText).toEqual('TEST INPUT');
-    // });
+  it('should create', () => {
+    expect(CourseComponent).toBeTruthy();
+  });
 
-    // it('should render button title', () => {
-    //   const fixture = TestBed.createComponent(CourseComponent);
-    //   fixture.detectChanges();
-    //   const compiled = fixture.nativeElement;
-    //   expect(compiled.querySelector('.course .block-wrapper .btns .delete-btn').textContent).toContain('Delete');
-    // });
+  it('should render course title', () => {
+    const h3 = fixture.nativeElement.querySelector('h3');
+    expect(h3.textContent).toContain('Ethical, Professional and Legal Standards in Psychology');
+  });
+
+  it('raises the deleteCourse event when clicked', () => {
+    let selectedId: number;
+    let deleteBtnDe;
+    deleteBtnDe = fixture.debugElement.query(By.css('.delete-btn'));
+
+    component.deleteCourse.subscribe((id: number) => selectedId = id);
+    deleteBtnDe.triggerEventHandler('click', selectedId);
+    expect(selectedId).toBe(expectedCourse.id);
+
+  });
+
 });
