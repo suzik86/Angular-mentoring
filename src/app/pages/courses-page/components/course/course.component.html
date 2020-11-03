@@ -1,5 +1,5 @@
 <div class="course">
-  <h3>{{course.title}}</h3>
+  <h3 class="course-title">{{course.title}}</h3>
   <div class="time">
     <span>{{course.creationDate}}</span>
     <span class="duration">{{course.duration}}</span>
@@ -10,7 +10,7 @@
     </div>
     <div class="btns">
       <button class="edit-btn">Edit</button>
-      <button class="delete-btn" (click)="deleteCourse.emit(course.id)">Delete</button>
+      <button class="delete-btn" (click)="onClick(course.id)">Delete</button>
     </div>
   </div>
 </div>

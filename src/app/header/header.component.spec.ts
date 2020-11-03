@@ -22,4 +22,9 @@ describe('HeaderComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should render site title', () => {
+      const compiled = fixture.nativeElement;
+      expect(compiled.querySelector('h1').textContent).toEqual('VIDEO COURSE');
+    });
 });

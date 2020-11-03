@@ -10,4 +10,7 @@ export class CourseComponent {
   @Input() course: Course;
   @Output() deleteCourse = new EventEmitter();
 
+  onClick(id: number): void {
+    this.deleteCourse.emit(id);
+  }
 }
