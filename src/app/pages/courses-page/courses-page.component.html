@@ -1,6 +1,5 @@
 <section class="main-section">
-  <app-actions-panel></app-actions-panel>
-  <app-courses-list></app-courses-list>
-  <button class="load-btn" (click)='loadMore()'>Load more</button>
+  <app-actions-panel (searchTextUp)="getText($event)"></app-actions-panel>
+  <app-courses-list [searchCourse]="searchText"></app-courses-list>
 </section>
 

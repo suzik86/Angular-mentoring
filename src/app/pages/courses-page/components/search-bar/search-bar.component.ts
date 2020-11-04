@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component,  EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-search-bar',
@@ -7,8 +7,10 @@ import { Component } from '@angular/core';
 })
 export class SearchBarComponent {
   searchValue = '';
+  @Output() searchTextOut = new EventEmitter();
 
-  onClick(): void{
-    console.log(this.searchValue);
+  onClick(serchText: string): void {
+      this.searchTextOut.emit(serchText);
   }
+
 }

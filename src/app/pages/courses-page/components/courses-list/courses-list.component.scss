@@ -1,3 +1,23 @@
 ul {
   list-style: none;
 }
+
+.no-data-message {
+  font-style: italic;
+  font-size: 25px;
+  width: 380px;
+  margin: 0 auto;
+  margin-top: 50px;
+}
+
+.load-btn {
+  height: 50px;
+  width: 90%;
+  background-color: white;
+  color: blue;
+  text-decoration: underline;
+  border: none;
+  display: block;
+  margin: 0 auto;
+}
+
