@@ -4,45 +4,22 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
-import { FooterComponent } from './footer/footer.component';
-import { HeaderComponent } from './header/header.component';
-import { ActionsPanelComponent } from './pages/courses-page/components/actions-panel/actions-panel.component';
-import { CourseComponent } from './pages/courses-page/components/course/course.component';
-import { CoursesListComponent } from './pages/courses-page/components/courses-list/courses-list.component';
-import { SearchBarComponent } from './pages/courses-page/components/search-bar/search-bar.component';
-import { CoursesPageComponent } from './pages/courses-page/courses-page.component';
-import { SetCourseBorderDirective } from './shared/directives/set-course-border.directive';
-import { DurationPipe } from './shared/pipes/duration.pipe';
-import { FilterPipe } from './shared/pipes/filter.pipe';
-import { OrderByPipe } from './shared/pipes/order-by.pipe';
-import { UserComponent } from './shared/user/user.component';
+import { CoursesPageModule } from './pages/courses-page/courses-page.module';
+import { SharedModule } from './shared/shared.module';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent,
-    FooterComponent,
-    BreadcrumbsComponent,
-    CoursesListComponent,
-    CoursesPageComponent,
-    ActionsPanelComponent,
-    CourseComponent,
-    UserComponent,
-    SearchBarComponent,
-    SetCourseBorderDirective,
-    DurationPipe,
-    OrderByPipe,
-    FilterPipe,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    SharedModule,
+    CoursesPageModule
   ],
-  providers: [
-    FilterPipe,
-  ],
+  providers: [],
   bootstrap: [AppComponent],
 })
 export class AppModule { }
