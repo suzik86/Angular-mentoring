@@ -6,10 +6,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./courses-page.component.scss'],
 })
 export class CoursesPageComponent {
-  searchText: string;
+  query: string;
 
-  getText(text: string): void {
-    this.searchText = text;
-    console.log(this.searchText);
+  setQuery(text: string): void {
+    this.query = text;
+    console.log(this.query);
   }
 }

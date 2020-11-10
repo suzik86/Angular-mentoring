@@ -1,5 +1,5 @@
 <section class="main-section">
-  <app-actions-panel (searchTextUp)="getText($event)"></app-actions-panel>
-  <app-courses-list [searchCourse]="searchText"></app-courses-list>
+  <app-actions-panel (searchTextUp)="setQuery($event)"></app-actions-panel>
+  <app-courses-list [searchCourse]="query"></app-courses-list>
 </section>
 

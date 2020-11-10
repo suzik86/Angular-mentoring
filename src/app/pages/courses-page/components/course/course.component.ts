@@ -9,7 +9,8 @@ import Course from './course.types';
 export class CourseComponent implements OnInit{
   @Input() course: Course;
   @Output() deleteCourse = new EventEmitter();
-  creationDate: string | number;
+
+  creationDate: string;
 
   ngOnInit(): void {
     this.creationDate = this.course.creationDate;

@@ -12,7 +12,7 @@ import { CourseComponent } from './pages/courses-page/components/course/course.c
 import { CoursesListComponent } from './pages/courses-page/components/courses-list/courses-list.component';
 import { SearchBarComponent } from './pages/courses-page/components/search-bar/search-bar.component';
 import { CoursesPageComponent } from './pages/courses-page/courses-page.component';
-import { ChangeCourseBorderDirective } from './shared/directives/change-course-border.directive';
+import { SetCourseBorderDirective } from './shared/directives/set-course-border.directive';
 import { DurationPipe } from './shared/pipes/duration.pipe';
 import { FilterPipe } from './shared/pipes/filter.pipe';
 import { OrderByPipe } from './shared/pipes/order-by.pipe';
@@ -30,7 +30,7 @@ import { UserComponent } from './shared/user/user.component';
     CourseComponent,
     UserComponent,
     SearchBarComponent,
-    ChangeCourseBorderDirective,
+    SetCourseBorderDirective,
     DurationPipe,
     OrderByPipe,
     FilterPipe,

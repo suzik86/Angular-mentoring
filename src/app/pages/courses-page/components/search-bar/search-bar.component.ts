@@ -6,11 +6,12 @@ import { Component,  EventEmitter, Output } from '@angular/core';
   styleUrls: ['./search-bar.component.scss'],
 })
 export class SearchBarComponent {
+  @Output() searchCourses = new EventEmitter();
+
   searchValue = '';
-  @Output() searchTextOut = new EventEmitter();
 
   onClick(serchText: string): void {
-      this.searchTextOut.emit(serchText);
+      this.searchCourses.emit(serchText);
   }
 
 }

@@ -6,15 +6,13 @@ import { Component, EventEmitter, Output } from '@angular/core';
   styleUrls: ['./actions-panel.component.scss'],
 })
 export class ActionsPanelComponent {
-  searchText: string;
-  @Output() searchTextUp = new EventEmitter();
+  @Output() searchTextUp = new EventEmitter<string>();
 
-  getSearchText(text: string): void{
+  searchText: string;
+
+  onSearchCourses(text: string): void{
     this.searchText = text;
     this.searchTextUp.emit(text);
   }
 
-  seeText(): void {
-    console.log(this.searchText);
-  }
 }

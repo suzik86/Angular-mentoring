@@ -1,6 +1,6 @@
-import { ChangeCourseBorderDirective } from './change-course-border.directive';
+import { SetCourseBorderDirective } from './set-course-border.directive';
 
-describe('ChangeCourseBorderDirective', () => {
+describe('SetCourseBorderDirective', () => {
   // it('should create an instance', () => {
   //   const directive = new ChangeCourseBorderDirective();
   //   expect(directive).toBeTruthy();
