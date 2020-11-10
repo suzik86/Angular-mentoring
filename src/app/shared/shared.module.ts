@@ -5,11 +5,11 @@ import { FormsModule } from '@angular/forms';
 import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
+import { UserComponent } from './components/user/user.component';
 import { SetCourseBorderDirective } from './directives/set-course-border.directive';
 import { DurationPipe } from './pipes/duration.pipe';
 import { FilterPipe } from './pipes/filter.pipe';
 import { OrderByPipe } from './pipes/order-by.pipe';
-import { UserComponent } from './components/user/user.component';
 
 @NgModule({
   imports: [ CommonModule ],
@@ -20,9 +20,9 @@ import { UserComponent } from './components/user/user.component';
     SetCourseBorderDirective,
     DurationPipe,
     OrderByPipe,
-    UserComponent
+    UserComponent,
   ],
-  exports:[
+  exports: [
     HeaderComponent,
     FooterComponent,
     BreadcrumbsComponent,
@@ -31,7 +31,7 @@ import { UserComponent } from './components/user/user.component';
     OrderByPipe,
     UserComponent,
     CommonModule,
-    FormsModule
+    FormsModule,
   ],
   providers: [
     FilterPipe,

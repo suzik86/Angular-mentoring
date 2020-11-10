@@ -21,14 +21,14 @@ import { CoursesPageComponent } from './courses-page.component';
     SearchBarComponent,
     CoursesPageComponent,
   ],
-  exports:[
+  exports: [
     ActionsPanelComponent,
     CourseComponent,
     CoursesListComponent,
     SearchBarComponent,
     CoursesPageComponent,
     CommonModule,
-    FormsModule
+    FormsModule,
   ],
   providers: [],
 })
