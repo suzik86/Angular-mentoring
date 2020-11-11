@@ -25,7 +25,7 @@ describe('SearchBarComponent', () => {
 
   it('should log message after click', () => {
     const consoleSpy = spyOn(console, 'log');
-    component.onClick();
+    component.onClick('some text');
     expect(consoleSpy).toHaveBeenCalled();
   });
 });

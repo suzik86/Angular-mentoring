@@ -1,8 +1,15 @@
-<div class="course">
-  <h3 class="course-title">{{course.title}}</h3>
-  <div class="time">
-    <span>{{course.creationDate}}</span>
-    <span class="duration">{{course.duration}}</span>
+<div class="course" [ngClass]="{'premium': course.topRated}" [appSetCourseBorder]="creationDate">
+  <div class="course-header">
+    <div>
+      <h4 class="course-title">{{course.title | uppercase}}</h4>
+      <div *ngIf="course.topRated" class="top-rated">
+        <i class="fa fa-star"></i>
+      </div>
+    </div>
+    <div class="time">
+      <span class="creation-date">{{course.creationDate | date: 'mediumDate'}}</span>
+      <span class="duration">{{course.duration | duration}}</span>
+    </div>
   </div>
   <div class="block-wrapper">
     <div class="description">

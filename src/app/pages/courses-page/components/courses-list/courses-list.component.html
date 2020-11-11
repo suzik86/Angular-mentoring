@@ -1,6 +1,13 @@
-<ul>
-  <li *ngFor="let course of courses">
-    <app-course [course]="course" (deleteCourse) = "onDeleteCourse($event)" ></app-course>
-  </li>
-</ul>
+<ng-template [ngIf]="courses.length" [ngIfElse]="noDataMessage">
+  <ul>
+    <li *ngFor="let course of filteredCourses | orderBy: 'creationDate', 'ASC'">
+      <app-course [course]="course" (deleteCourse) = "onDeleteCourse($event)" ></app-course>
+    </li>
+  </ul>
+  <button *ngIf="filteredCourses.length" class="load-btn" (click)='loadMore()'>Load more</button>
+</ng-template>
+<ng-template #noDataMessage>
+  <div class="no-data-message">No data. Fell free to add new course.</div>
+</ng-template>
+
 
