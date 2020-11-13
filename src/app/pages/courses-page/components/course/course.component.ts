@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import Course from './course.types';
 import { MatDialog } from '@angular/material/dialog';
+import Course from './course.types';
 import { DeleteCourseModalComponent } from './delete-course-modal/delete-course-modal.component';
 
 @Component({
@@ -23,7 +23,7 @@ export class CourseComponent implements OnInit{
   openDialog(): void {
     const dialogRef = this.dialog.open(DeleteCourseModalComponent, {
       width: '500px',
-      data: { id: this.course.id }
+      data: { id: this.course.id },
     });
 
     // dialogRef.afterClosed().subscribe(result => {

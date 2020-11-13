@@ -1,8 +1,8 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { LoginPageComponent } from './login-page.component';
-import { SharedModule } from 'src/app/shared/shared.module';
+import { NgModule } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
+import { SharedModule } from 'src/app/shared/shared.module';
+import { LoginPageComponent } from './login-page.component';
 
 
 

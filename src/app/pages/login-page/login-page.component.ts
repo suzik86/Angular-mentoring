@@ -4,7 +4,7 @@ import { AuthenticationService } from '../../shared/services/authentication.serv
 @Component({
   selector: 'app-login-page',
   templateUrl: './login-page.component.html',
-  styleUrls: ['./login-page.component.scss']
+  styleUrls: ['./login-page.component.scss'],
 })
 export class LoginPageComponent {
   login: string;
@@ -14,7 +14,7 @@ export class LoginPageComponent {
     private authenticationService: AuthenticationService,
     ) {}
 
-  onLogin() {
+  onLogin(): void {
     this.authenticationService.login(this.login, this.password);
   }
 

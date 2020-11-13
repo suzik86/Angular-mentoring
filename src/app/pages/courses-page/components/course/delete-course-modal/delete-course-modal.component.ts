@@ -5,13 +5,13 @@ import { CoursesService } from '../../../courses.service';
 @Component({
   selector: 'app-delete-course-modal',
   templateUrl: './delete-course-modal.component.html',
-  styleUrls: ['./delete-course-modal.component.sass']
+  styleUrls: ['./delete-course-modal.component.sass'],
 })
 export class DeleteCourseModalComponent {
   constructor(
     private coursesService: CoursesService,
     public dialogRef: MatDialogRef<DeleteCourseModalComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any
+    @Inject(MAT_DIALOG_DATA) public data: any,
   ) { }
 
   onNoClick(): void {

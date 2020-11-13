@@ -3,7 +3,7 @@ import { LocalStorage } from 'ngx-store';
 import User from '../components/user/user.types';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthenticationService {
   @LocalStorage() user: User;
@@ -14,15 +14,15 @@ export class AuthenticationService {
       firstName: 'Den',
       lastName: 'Street',
       login: 'star',
-      password: '123rhj'
+      password: '123rhj',
     },
     {
       id: 2,
       firstName: 'Vera',
       lastName: 'White',
       login: 'kitty',
-      password: '1644xdrd'
-    }
+      password: '1644xdrd',
+    },
   ];
 
   constructor() { }
@@ -31,14 +31,14 @@ export class AuthenticationService {
     return !!this.token;
   }
 
-  login(name, password) {
+  login(name, password): void {
     console.log('Succesfully logined user with password', name, password);
     this.token = 'asdasdasdasda';
     this.user = this.users[0];
     console.log('Token: ', this.token);
   }
 
-  logout() {
+  logout(): void {
     this.token = '';
     this.user = null;
   }

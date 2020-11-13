@@ -1,7 +1,7 @@
 import { Component, DoCheck, Input } from '@angular/core';
 import { FilterPipe } from 'src/app/shared/pipes/filter.pipe';
-import Course from '../course/course.types';
 import { CoursesService } from '../../courses.service';
+import Course from '../course/course.types';
 
 @Component({
   selector: 'app-courses-list',
@@ -22,7 +22,7 @@ export class CoursesListComponent implements DoCheck{
     this.courses = this.coursesService.list;
   }
 
-  get coursesList() {
+  get coursesList(): Array<Course> {
     return this.courses;
   }
 
