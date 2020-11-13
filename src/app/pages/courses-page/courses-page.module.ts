@@ -8,11 +8,22 @@ import { CourseComponent } from './components/course/course.component';
 import { CoursesListComponent } from './components/courses-list/courses-list.component';
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
 import { CoursesPageComponent } from './courses-page.component';
+import { CoursesService } from './courses.service';
+import { MatDialogModule } from "@angular/material/dialog";
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { DeleteCourseModalComponent } from './components/course/delete-course-modal/delete-course-modal.component';
+
 
 @NgModule({
   imports: [
     CommonModule,
     SharedModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule
    ],
   declarations: [
     ActionsPanelComponent,
@@ -20,6 +31,7 @@ import { CoursesPageComponent } from './courses-page.component';
     CoursesListComponent,
     SearchBarComponent,
     CoursesPageComponent,
+    DeleteCourseModalComponent,
   ],
   exports: [
     ActionsPanelComponent,
@@ -30,6 +42,8 @@ import { CoursesPageComponent } from './courses-page.component';
     CommonModule,
     FormsModule,
   ],
-  providers: [],
+  providers: [
+    CoursesService,
+  ],
 })
 export class CoursesPageModule { }

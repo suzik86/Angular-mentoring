@@ -10,9 +10,14 @@ import { SetCourseBorderDirective } from './directives/set-course-border.directi
 import { DurationPipe } from './pipes/duration.pipe';
 import { FilterPipe } from './pipes/filter.pipe';
 import { OrderByPipe } from './pipes/order-by.pipe';
+import { AuthenticationService } from './services/authentication.service';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
-  imports: [ CommonModule ],
+  imports: [
+    CommonModule,
+    MatButtonModule,
+   ],
   declarations: [
     HeaderComponent,
     FooterComponent,
@@ -32,9 +37,11 @@ import { OrderByPipe } from './pipes/order-by.pipe';
     UserComponent,
     CommonModule,
     FormsModule,
+    MatButtonModule,
   ],
   providers: [
     FilterPipe,
+    AuthenticationService,
   ],
 })
 export class SharedModule { }

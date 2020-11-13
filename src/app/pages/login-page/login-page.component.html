@@ -1,0 +1,15 @@
+<form class="login-form">
+  <h1>Login</h1>
+  <div class="group">
+    <label for="email">E-mail:</label>
+    <input type="text" class='email-input' name="email" placeholder="Enter email">
+  </div>
+  <div class="group">
+    <label for="password">Password:</label>
+    <input type="password" class='password-input' name="password" placeholder="Enter password">
+  </div>
+  <div class="flex-group">
+    <a href="#" class="reset-link">Forgot password?</a>
+    <button mat-raised-button type="submit" class='login-btn' (click)='onLogin()'>Login</button>
+  </div>
+</form>

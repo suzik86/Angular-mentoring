@@ -91,15 +91,15 @@ describe('CourseComponent', () => {
     expect(h3.textContent).toContain('Ethical, Professional and Legal Standards in Psychology');
   });
 
-  it('raises the deleteCourse event when clicked', () => {
-    let selectedId: number;
-    let deleteBtnDe;
-    deleteBtnDe = fixture.debugElement.query(By.css('.delete-btn'));
+  // it('raises the deleteCourse event when clicked', () => {
+  //   let selectedId: number;
+  //   let deleteBtnDe;
+  //   deleteBtnDe = fixture.debugElement.query(By.css('.delete-btn'));
 
-    component.deleteCourse.subscribe((id: number) => selectedId = id);
-    deleteBtnDe.triggerEventHandler('click', selectedId);
-    expect(selectedId).toBe(expectedCourse.id);
+  //   component.deleteCourse.subscribe((id: number) => selectedId = id);
+  //   deleteBtnDe.triggerEventHandler('click', selectedId);
+  //   expect(selectedId).toBe(expectedCourse.id);
 
-  });
+  // });
 
 });
