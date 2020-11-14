@@ -13,7 +13,7 @@ export class CourseComponent implements OnInit{
 
   creationDate: string;
 
-  constructor(public dialog:MatDialog ) { }
+  constructor(public dialog: MatDialog ) { }
 
   ngOnInit(): void {
     this.creationDate = this.course.creationDate;

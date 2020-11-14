@@ -1,9 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CoursesListComponent } from './courses-list.component';
-import { FilterPipe } from '../../../../shared/pipes/filter.pipe';
 import { Pipe, PipeTransform } from '@angular/core';
+import { FilterPipe } from '../../../../shared/pipes/filter.pipe';
 import Course from '../course/course.types';
+import { CoursesListComponent } from './courses-list.component';
 
 
 @Pipe({name: 'pipename'})

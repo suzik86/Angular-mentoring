@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { Pipe, PipeTransform } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { By } from '@angular/platform-browser';
+import { DurationPipe } from '../../../../shared/pipes/duration.pipe';
+import { FilterPipe } from '../../../../shared/pipes/filter.pipe';
+import { SharedModule } from '../../../../shared/shared.module';
 import { CourseComponent } from './course.component';
 import Course from './course.types';
-import { MatDialog } from '@angular/material/dialog';
-import { FilterPipe } from '../../../../shared/pipes/filter.pipe';
-import { DurationPipe } from '../../../../shared/pipes/duration.pipe';
-import { Pipe, PipeTransform } from '@angular/core';
-import { SharedModule } from '../../../../shared/shared.module';
 
 @Pipe({name: 'pipename'})
 class MockPipe implements PipeTransform {
@@ -35,7 +35,7 @@ describe('CourseComponent', () => {
         { provide: FilterPipe, useValue: MockPipe },
         { provide: DurationPipe, useValue: MockPipe },
       ],
-      imports: [ SharedModule ]
+      imports: [ SharedModule ],
     })
     .compileComponents();
   });
@@ -92,7 +92,7 @@ describe('CourseComponent', () => {
         { provide: FilterPipe, useValue: MockPipe },
         { provide: DurationPipe, useValue: MockPipe },
       ],
-      imports: [ SharedModule ]
+      imports: [ SharedModule ],
     })
     .compileComponents();
   });

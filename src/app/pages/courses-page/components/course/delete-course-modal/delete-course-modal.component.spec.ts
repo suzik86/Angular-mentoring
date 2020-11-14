@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DeleteCourseModalComponent } from './delete-course-modal.component';
 import { MatDialogRef } from '@angular/material/dialog';
+import { DeleteCourseModalComponent } from './delete-course-modal.component';
 
 describe('DeleteCourseModalComponent', () => {
   let component: DeleteCourseModalComponent;
@@ -13,7 +13,7 @@ describe('DeleteCourseModalComponent', () => {
       providers: [
          {
            provide: MatDialogRef,
-           useValue: {}
+           useValue: {},
          },
       ],
     })
