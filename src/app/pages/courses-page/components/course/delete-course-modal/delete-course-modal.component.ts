@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, Optional } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CoursesService } from '../../../courses.service';
 
@@ -11,7 +11,7 @@ export class DeleteCourseModalComponent {
   constructor(
     private coursesService: CoursesService,
     public dialogRef: MatDialogRef<DeleteCourseModalComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any,
+    @Optional() @Inject(MAT_DIALOG_DATA) public data: any,
   ) { }
 
   onNoClick(): void {
