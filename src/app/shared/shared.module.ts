@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
+import { MatButtonModule } from '@angular/material/button';
 import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -10,9 +11,14 @@ import { SetCourseBorderDirective } from './directives/set-course-border.directi
 import { DurationPipe } from './pipes/duration.pipe';
 import { FilterPipe } from './pipes/filter.pipe';
 import { OrderByPipe } from './pipes/order-by.pipe';
+import { AuthenticationService } from './services/authentication.service';
+import { AuthenticationImplementationService } from './services/authentication-implementation.service';
 
 @NgModule({
-  imports: [ CommonModule ],
+  imports: [
+    CommonModule,
+    MatButtonModule,
+   ],
   declarations: [
     HeaderComponent,
     FooterComponent,
@@ -32,9 +38,11 @@ import { OrderByPipe } from './pipes/order-by.pipe';
     UserComponent,
     CommonModule,
     FormsModule,
+    MatButtonModule,
   ],
   providers: [
     FilterPipe,
+    { provide: AuthenticationService, useClass: AuthenticationImplementationService },
   ],
 })
 export class SharedModule { }

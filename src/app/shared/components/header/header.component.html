@@ -3,8 +3,12 @@
     <img class="logo" src="../../assets/logo.png" alt="Logo" />
     <h1>VIDEO COURSE</h1>
   </div>
-  <div>
-    <span class="login">User login</span>
-    <button class="log-off-btn">Log off</button>
+  <div class="user-info" *ngIf="authenticationService.isAuthenticated">
+    <span>{{authenticationService.user.firstName}}</span>
+    <button mat-button class="log-off-btn" (click)="authenticationService.logout()">Log off</button>
   </div>
+  <div class="user-info" *ngIf="!authenticationService.isAuthenticated">
+    <button mat-button class="login">User login</button>
+  </div>
+
 </div>

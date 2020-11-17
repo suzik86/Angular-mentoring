@@ -1,5 +1,7 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import Course from './course.types';
+import { DeleteCourseModalComponent } from './delete-course-modal/delete-course-modal.component';
 
 @Component({
   selector: 'app-course',
@@ -8,15 +10,20 @@ import Course from './course.types';
 })
 export class CourseComponent implements OnInit{
   @Input() course: Course;
-  @Output() deleteCourse = new EventEmitter();
 
   creationDate: string;
+
+  constructor(public dialog: MatDialog ) { }
 
   ngOnInit(): void {
     this.creationDate = this.course.creationDate;
   }
 
-  onClick(id: number): void {
-    this.deleteCourse.emit(id);
+  openDialog(): void {
+    this.dialog.open(DeleteCourseModalComponent, {
+      width: '500px',
+      data: { id: this.course.id },
+    });
+
   }
 }

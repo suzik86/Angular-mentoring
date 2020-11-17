@@ -1,6 +1,7 @@
 {
   "extends": "tslint:recommended",
   "rulesDirectory": [
+    "node_modules/tslint-origin-ordered-imports-rule/dist",
     "codelyzer"
   ],
   "rules": {
@@ -23,12 +24,13 @@
     ],
     "import-spacing": true,
     "indent": [true, "spaces", 4],
-    "ordered-imports": [
+    "origin-ordered-imports": [
       true,
-      {
-        "import-sources-order": "lowercase-last",
-        "named-imports-order": "lowercase-first"
-      }
+      [
+          "lib",
+          "^@custom/.+",
+          "user"
+      ]
     ],
     "max-classes-per-file": false,
     "max-line-length": [

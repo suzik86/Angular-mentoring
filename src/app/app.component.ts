@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthenticationService } from './shared/services/authentication.service';
 
 @Component({
   selector: 'app-root',
@@ -7,5 +8,13 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'my-app';
+
+  constructor(
+    public authenticationService: AuthenticationService,
+    ) {}
+
+  get isAuthenticated(): boolean {
+    return this.authenticationService.isAuthenticated;
+  }
 
 }
