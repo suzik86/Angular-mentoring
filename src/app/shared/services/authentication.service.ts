@@ -5,45 +5,12 @@ import User from '../components/user/user.types';
 @Injectable({
   providedIn: 'root',
 })
-export class AuthenticationService {
-  @LocalStorage() user: User;
-  @LocalStorage() token: string;
-  private users: Array<User> = [
-    {
-      id: 1,
-      firstName: 'Den',
-      lastName: 'Street',
-      login: 'star',
-      password: '123rhj',
-    },
-    {
-      id: 2,
-      firstName: 'Vera',
-      lastName: 'White',
-      login: 'kitty',
-      password: '1644xdrd',
-    },
-  ];
+export abstract class AuthenticationService {
+  abstract get isAuthenticated(): boolean;
 
-  constructor() { }
+  abstract login(login: string, password: string): void;
 
-  get isAuthenticated(): boolean {
-    return !!this.token;
-  }
+  abstract logout(): void;
 
-  login(name, password): void {
-    console.log('Succesfully logined user with password', name, password);
-    this.token = 'asdasdasdasda';
-    this.user = this.users[0];
-    console.log('Token: ', this.token);
-  }
-
-  logout(): void {
-    this.token = '';
-    this.user = null;
-  }
-
-  getUsersInfo(): User {
-    return this.user;
-  }
+  abstract getUsersInfo(): User;
 }

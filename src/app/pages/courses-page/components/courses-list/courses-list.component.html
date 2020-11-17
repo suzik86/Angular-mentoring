@@ -1,13 +1,13 @@
-<ng-template [ngIf]="filteredCourses.length" [ngIfElse]="noDataMessage">
+<ng-container *ngIf="filteredCourses.length">
   <ul>
-    <li *ngFor="let course of filteredCourses | orderBy: 'creationDate', 'ASC'">
+    <li *ngFor="let course of filteredCourses | orderBy: 'creationDate' : 'ASC'">
       <app-course [course]="course"></app-course>
     </li>
   </ul>
   <button class="load-btn" (click)='loadMore()'>Load more</button>
-</ng-template>
-<ng-template #noDataMessage>
+</ng-container>
+<ng-container *ngIf="!filteredCourses.length">
   <div class="no-data-message">No data. Fell free to add new course.</div>
-</ng-template>
+</ng-container>
 
 

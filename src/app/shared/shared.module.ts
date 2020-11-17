@@ -12,6 +12,7 @@ import { DurationPipe } from './pipes/duration.pipe';
 import { FilterPipe } from './pipes/filter.pipe';
 import { OrderByPipe } from './pipes/order-by.pipe';
 import { AuthenticationService } from './services/authentication.service';
+import { AuthenticationImplementationService } from './services/authentication-implementation.service';
 
 @NgModule({
   imports: [
@@ -41,7 +42,7 @@ import { AuthenticationService } from './services/authentication.service';
   ],
   providers: [
     FilterPipe,
-    AuthenticationService,
+    { provide: AuthenticationService, useClass: AuthenticationImplementationService },
   ],
 })
 export class SharedModule { }

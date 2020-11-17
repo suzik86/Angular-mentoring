@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { Pipe, PipeTransform } from '@angular/core';
 import { FilterPipe } from '../../../../shared/pipes/filter.pipe';
 import Course from '../course/course.types';

@@ -16,6 +16,10 @@ export class LoginPageComponent {
 
   onLogin(): void {
     this.authenticationService.login(this.login, this.password);
+    if (!this.authenticationService.isAuthenticated) {
+      this.login = '';
+      this.password = '';
+    }
   }
 
 }

@@ -13,4 +13,8 @@ export class AppComponent {
     public authenticationService: AuthenticationService,
     ) {}
 
+  get isAuthenticated(): boolean {
+    return this.authenticationService.isAuthenticated;
+  }
+
 }

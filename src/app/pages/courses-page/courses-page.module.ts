@@ -14,6 +14,7 @@ import { CoursesListComponent } from './components/courses-list/courses-list.com
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
 import { CoursesPageComponent } from './courses-page.component';
 import { CoursesService } from './courses.service';
+import { CoursesImplementationService } from './courses-implementation.service';
 
 
 @NgModule({
@@ -43,7 +44,7 @@ import { CoursesService } from './courses.service';
     FormsModule,
   ],
   providers: [
-    CoursesService,
+    { provide: CoursesService, useClass: CoursesImplementationService },
   ],
 })
 export class CoursesPageModule { }

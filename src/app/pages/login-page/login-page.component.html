@@ -2,11 +2,11 @@
   <h1>Login</h1>
   <div class="group">
     <label for="email">E-mail:</label>
-    <input type="text" class='email-input' name="email" placeholder="Enter email">
+    <input [(ngModel)]="login" type="text" class='email-input' id="email" name="email" placeholder="Enter email">
   </div>
   <div class="group">
     <label for="password">Password:</label>
-    <input type="password" class='password-input' name="password" placeholder="Enter password">
+    <input [(ngModel)]="password" type="password" class='password-input' id="password" name="password" placeholder="Enter password">
   </div>
   <div class="flex-group">
     <a href="#" class="reset-link">Forgot password?</a>
