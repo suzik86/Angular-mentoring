@@ -6,6 +6,7 @@ import { CoursesService } from './courses.service';
   providedIn: 'root',
 })
 export class CoursesImplementationService  implements CoursesService{
+  private courseCreation = false;
   private courses: Array<Course> = [
     {
       id: 1,
@@ -35,6 +36,14 @@ export class CoursesImplementationService  implements CoursesService{
 
   get list(): Array<Course> {
     return this.courses;
+  }
+
+  get isCourseCreation(): boolean {
+    return this.courseCreation;
+  }
+
+  set isCourseCreation(value) {
+    this.courseCreation = value;
   }
 
   createCourse(course): void {

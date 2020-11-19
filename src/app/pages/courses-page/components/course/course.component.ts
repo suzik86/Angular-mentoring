@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import Course from './course.types';
 import { DeleteCourseModalComponent } from './delete-course-modal/delete-course-modal.component';
@@ -7,6 +7,7 @@ import { DeleteCourseModalComponent } from './delete-course-modal/delete-course-
   selector: 'app-course',
   templateUrl: './course.component.html',
   styleUrls: ['./course.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CourseComponent implements OnInit{
   @Input() course: Course;

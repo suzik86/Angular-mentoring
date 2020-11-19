@@ -9,6 +9,8 @@ import { AppComponent } from './app.component';
 import { CoursesPageModule } from './pages/courses-page/courses-page.module';
 import { LoginPageModule } from './pages/login-page/login-page.module';
 import { SharedModule } from './shared/shared.module';
+import { AddCoursePageModule } from './pages/add-course-page/add-course-page.module';
+
 
 
 @NgModule({
@@ -24,6 +26,7 @@ import { SharedModule } from './shared/shared.module';
     BrowserAnimationsModule,
     LoginPageModule,
     WebStorageModule,
+    AddCoursePageModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

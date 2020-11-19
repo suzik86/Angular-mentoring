@@ -22,7 +22,7 @@ export class AuthenticationImplementationService implements AuthenticationServic
       firstName: 'Vera',
       lastName: 'White',
       login: 'kitty',
-      password: '1644xdrd',
+      password: '2608',
     },
   ];
 
