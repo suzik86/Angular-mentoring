@@ -7,8 +7,6 @@ import { AddCoursePageComponent } from './add-course-page.component';
 import { DateComponent } from './components/date/date.component';
 import { DurationComponent } from './components/duration/duration.component';
 
-
-
 @NgModule({
   imports: [
     CommonModule,
@@ -22,11 +20,7 @@ import { DurationComponent } from './components/duration/duration.component';
     DurationComponent,
   ],
   exports: [
-    CommonModule,
     AddCoursePageComponent,
-    MatButtonModule,
-  ],
-  providers: [
-  ],
+  ]
 })
 export class AddCoursePageModule { }
