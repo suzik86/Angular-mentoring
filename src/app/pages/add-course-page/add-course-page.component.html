@@ -1,0 +1,25 @@
+<form class="form">
+
+  <mat-form-field appearance="outline" class="field">
+    <mat-label>Title:</mat-label>
+    <input matInput [(ngModel)]='title' name='title'>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="field">
+    <mat-label>Description:</mat-label>
+    <textarea matInput placeholder="Course description" [(ngModel)]='description' name='description'></textarea>
+  </mat-form-field>
+
+  <app-date [creationDate]='creationDate'></app-date>
+
+  <app-duration [duration]='duration'></app-duration>
+
+  <mat-form-field appearance="outline" class="field">
+    <mat-label>Authors:</mat-label>
+    <input matInput value="">
+  </mat-form-field>
+
+  <button mat-raised-button color="accent" (click)='onSave()'>Save</button>
+  <button mat-raised-button (click)='onCancel()'>Cancel</button>
+  
+</form>

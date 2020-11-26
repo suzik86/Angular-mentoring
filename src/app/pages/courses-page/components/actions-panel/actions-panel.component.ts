@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Output } from '@angular/core';
+import { CoursesService } from '../../courses.service';
 
 @Component({
   selector: 'app-actions-panel',
@@ -10,9 +11,15 @@ export class ActionsPanelComponent {
 
   searchText: string;
 
+  constructor(private coursesService: CoursesService) {}
+
   onSearchCourses(text: string): void{
     this.searchText = text;
     this.searchTextUp.emit(text);
+  }
+
+  onAddCourse(): void {
+    this.coursesService.isCourseCreation = true;
   }
 
 }

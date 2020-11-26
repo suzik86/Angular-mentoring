@@ -1,0 +1,5 @@
+<mat-form-field appearance="outline" class="field duration">
+  <mat-label>Duration:</mat-label>
+  <input matInput [(ngModel)]='duration' name='duration'>
+</mat-form-field>
+<span *ngIf='duration' class="formatted-duration">{{duration |duration}}</span>
