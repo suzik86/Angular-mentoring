@@ -21,6 +21,6 @@ import { DurationComponent } from './components/duration/duration.component';
   ],
   exports: [
     AddCoursePageComponent,
-  ]
+  ],
 })
 export class AddCoursePageModule { }
