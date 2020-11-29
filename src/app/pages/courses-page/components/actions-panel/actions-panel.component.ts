@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { CoursesService } from '../../courses.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-actions-panel',
@@ -11,7 +11,7 @@ export class ActionsPanelComponent {
 
   searchText: string;
 
-  constructor(private coursesService: CoursesService) {}
+  constructor(private router: Router) {}
 
   onSearchCourses(text: string): void{
     this.searchText = text;
@@ -19,7 +19,7 @@ export class ActionsPanelComponent {
   }
 
   onAddCourse(): void {
-    this.coursesService.isCourseCreation = true;
+    this.router.navigate(['/courses/new']);
   }
 
 }

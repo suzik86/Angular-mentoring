@@ -13,8 +13,13 @@
   display: inline-block;
 }
 
-h1 {
+a {
+  text-decoration: none;
+}
+
+a h1 {
   display: inline;
+  color: white;
 }
 
 .login {

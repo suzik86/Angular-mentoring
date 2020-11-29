@@ -1,5 +1,6 @@
 import { Component, Input, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import Course from './course.types';
 import { DeleteCourseModalComponent } from './delete-course-modal/delete-course-modal.component';
 
@@ -14,7 +15,10 @@ export class CourseComponent implements OnInit{
 
   creationDate: string;
 
-  constructor(public dialog: MatDialog ) { }
+  constructor(
+    public dialog: MatDialog,
+    private router: Router,
+  ) { }
 
   ngOnInit(): void {
     this.creationDate = this.course.creationDate;
@@ -25,6 +29,9 @@ export class CourseComponent implements OnInit{
       width: '500px',
       data: { id: this.course.id },
     });
+  }
 
+  onEdit(): void {
+    this.router.navigate(['/courses/' + this.course.id]);
   }
 }

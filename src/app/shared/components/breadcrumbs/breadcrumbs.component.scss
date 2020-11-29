@@ -1,4 +1,14 @@
-p {
-  padding: 15px 60px;
+.breadcrumb li {
+  display: inline;
 }
-
+.breadcrumb li+li:before {
+  content: " > ";
+  color: darkgray;
+}
+.breadcrumb{
+  background-color: #f5f3f3;
+  padding: 20px;
+  a{
+    color: darkgray;
+  }
+}

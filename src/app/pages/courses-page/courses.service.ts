@@ -5,10 +5,6 @@ import Course from '../../pages/courses-page/components/course/course.types';
   providedIn: 'root',
 })
 export abstract class CoursesService {
-  abstract  get isCourseCreation(): boolean;
-
-  abstract set isCourseCreation(value);
-
   abstract get list(): Array<Course>;
 
   abstract createCourse(course): void;
