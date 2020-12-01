@@ -10,9 +10,9 @@
     <textarea matInput placeholder="Course description" [(ngModel)]='course.description' name='description'></textarea>
   </mat-form-field>
 
-  <app-date [creationDate]='course.creationDate' (ngModelChange)='changeDate($event)'></app-date>
+  <app-date [creationDate]='course.creationDate' (update)='changeDate($event)'></app-date>
 
-  <app-duration [duration]='course.duration' (ngModelChange)='changeDuration($event)'></app-duration>
+  <app-duration [duration]='course.duration' (update)='changeDuration($event)'></app-duration>
 
   <mat-form-field appearance="outline" class="field">
     <mat-label>Authors:</mat-label>
