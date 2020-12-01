@@ -1,4 +1,4 @@
 <mat-form-field appearance="outline" class="field">
   <mat-label>Date:</mat-label>
-  <input matInput [(ngModel)]='creationDate' name='creationDate'>
+  <input matInput [ngModel]='creationDate' name='creationDate' (ngModelChange)="onChange($event)">
 </mat-form-field>

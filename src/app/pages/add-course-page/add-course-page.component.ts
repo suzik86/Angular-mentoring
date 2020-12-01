@@ -27,6 +27,15 @@ export class AddCoursePageComponent {
       } else {
         this.course = new Course();
       }
+      localStorage.setItem('editableCourseName', this.course.title);
+  }
+
+  changeDuration(newValue): void {
+    this.course.duration = newValue;
+  }
+
+  changeDate(newValue): void {
+    this.course.creationDate = newValue;
   }
 
   onSave(): void {

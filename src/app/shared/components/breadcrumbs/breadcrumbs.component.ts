@@ -15,7 +15,8 @@ export class BreadcrumbsComponent implements OnInit {
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
     this.breadcrumbs$ = this.router.events.pipe(
@@ -27,23 +28,36 @@ export class BreadcrumbsComponent implements OnInit {
 
   buildBreadCrumb(route: ActivatedRoute, url: string = '',
                   breadcrumbs: Array<IBreadCrumb> = []): Array<IBreadCrumb> {
+
     // If no routeConfig is avalailable we are on the root path
-    const label = route.routeConfig && route.routeConfig.data ? route.routeConfig.data.breadcrumb : '';
-    const path = route.routeConfig ? route.routeConfig.path : '';
-    // In the routeConfig the complete path is not available,
-    // so we rebuild it each time
-    const nextUrl = `${url}${path}/`;
-    const breadcrumb = {
+    const newBreadcrumbs = [...breadcrumbs];
+    let nextUrl;
+
+    const label = this.isDynamicRoute(route)
+      ? localStorage.getItem(route.routeConfig?.data?.params.routeName)
+      : route.routeConfig?.data?.breadcrumb;
+    if (label) {
+      const path = route.routeConfig?.path;
+      // In the routeConfig the complete path is not available,
+      // so we rebuild it each time
+      nextUrl = `${url}${path}/`;
+      const breadcrumb = {
         label,
         url: nextUrl,
-    };
-    const newBreadcrumbs = label ? [ ...breadcrumbs, breadcrumb ] : breadcrumbs;
+      };
+      newBreadcrumbs.push(breadcrumb);
+    }
+
     if (route.firstChild) {
-        // If we are not on our current path yet,
-        // there will be more children to look after, to build our breadcumb
-        return this.buildBreadCrumb(route.firstChild, nextUrl, newBreadcrumbs);
+      // If we are not on our current path yet,
+      // there will be more children to look after, to build our breadcumb
+      return this.buildBreadCrumb(route.firstChild, nextUrl, newBreadcrumbs);
     }
 
     return newBreadcrumbs;
-}
+  }
+
+  isDynamicRoute(route): boolean {
+    return route.routeConfig?.data?.params?.isDynamicRoute;
+  }
 }

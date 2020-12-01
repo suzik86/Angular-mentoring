@@ -2,11 +2,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './auth/auth.guard';
 import { AuthModule } from './auth/auth.module';
-import { AddCoursePageComponent } from './pages/add-course-page/add-course-page.component';
-import { CoursesPageComponent } from './pages/courses-page/courses-page.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
-import { CourseComponent } from './pages/courses-page/components/course/course.component';
 
 const routes: Routes = [
   {
@@ -27,29 +24,7 @@ const routes: Routes = [
     data: {
       breadcrumb: 'Courses',
     },
-    children: [
-      {
-        path: '',
-        canActivate: [AuthGuard],
-        component: CoursesPageComponent,
-      },
-      {
-        path: 'new',
-        canActivate: [AuthGuard],
-        data: {
-          breadcrumb: 'New',
-        },
-        component: AddCoursePageComponent,
-      },
-      {
-        path: ':id',
-        canActivate: [AuthGuard],
-        data: {
-          breadcrumb: 'Edit',
-        },
-        component: AddCoursePageComponent,
-      },
-    ],
+    loadChildren: () => import('../app/pages/courses-page/courses-page.module').then(mod => mod.CoursesPageModule),
   },
   {
     path: '404',
