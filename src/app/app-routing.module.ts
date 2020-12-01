@@ -13,9 +13,6 @@ const routes: Routes = [
     path: '',
     redirectTo: 'courses',
     pathMatch: 'full',
-    data: {
-      breadcrumb: 'asdasd',
-    },
   },
   {
     path: 'login',
@@ -33,9 +30,6 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        data: {
-          breadcrumb: 'List',
-        },
         canActivate: [AuthGuard],
         component: CoursesPageComponent,
       },
