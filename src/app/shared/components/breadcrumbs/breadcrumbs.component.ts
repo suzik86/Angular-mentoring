@@ -21,8 +21,8 @@ export class BreadcrumbsComponent implements OnInit {
     this.breadcrumbs$ = this.router.events.pipe(
       filter(event => event instanceof NavigationEnd),
       distinctUntilChanged(),
-      map(event => this.buildBreadCrumb(this.activatedRoute.root))
-    )
+      map(event => this.buildBreadCrumb(this.activatedRoute.root)),
+    );
   }
 
   buildBreadCrumb(route: ActivatedRoute, url: string = '',
