@@ -38,15 +38,8 @@ export class CoursesImplementationService  implements CoursesService{
     return this.courses;
   }
 
-  get isCourseCreation(): boolean {
-    return this.courseCreation;
-  }
-
-  set isCourseCreation(value) {
-    this.courseCreation = value;
-  }
-
   createCourse(course): void {
+    course.id = this.courses.length + 1;
     this.courses.push(course);
   }
 

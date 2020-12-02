@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { SharedModule } from 'src/app/shared/shared.module';
-
+import { RouterModule } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -15,7 +15,7 @@ import { SearchBarComponent } from './components/search-bar/search-bar.component
 import { CoursesPageComponent } from './courses-page.component';
 import { CoursesService } from './courses.service';
 import { CoursesImplementationService } from './courses-implementation.service';
-
+import { CoursesPageRoutingModule } from './courses-page-routing.module';
 
 @NgModule({
   imports: [
@@ -25,6 +25,8 @@ import { CoursesImplementationService } from './courses-implementation.service';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
+    RouterModule,
+    CoursesPageRoutingModule,
    ],
   declarations: [
     ActionsPanelComponent,

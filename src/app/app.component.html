@@ -1,11 +1,9 @@
 <div class="content">
   <div class="content-inside">
     <app-header></app-header>
-    <app-breadcrumbs *ngIf="isAuthenticated && !isCourseCreation"></app-breadcrumbs>
-    <app-courses-page *ngIf="isAuthenticated && !isCourseCreation"></app-courses-page>
-    <app-login-page *ngIf="!isAuthenticated && !isCourseCreation"></app-login-page>
-    <app-add-course-page *ngIf="isCourseCreation"></app-add-course-page>
+    <app-breadcrumbs></app-breadcrumbs>
+    <router-outlet></router-outlet>
   </div>
 </div>
 <app-footer></app-footer>
-<!-- <router-outlet></router-outlet> -->
+

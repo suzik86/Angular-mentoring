@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { LocalStorage } from 'ngx-store';
 import User from '../components/user/user.types';
 import { AuthenticationService } from './authentication.service';
@@ -26,6 +27,14 @@ export class AuthenticationImplementationService implements AuthenticationServic
     },
   ];
 
+  constructor(
+    private router: Router,
+  ) {}
+
+  get currentUser(): User {
+    return this.user;
+  }
+
   get isAuthenticated(): boolean {
     return !!this.token;
   }
@@ -44,6 +53,7 @@ export class AuthenticationImplementationService implements AuthenticationServic
   logout(): void {
     this.token = '';
     this.user = null;
+    this.router.navigate(['/login']);
   }
 
   getUsersInfo(): User {

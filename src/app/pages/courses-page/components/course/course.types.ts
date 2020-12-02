@@ -1,4 +1,4 @@
-export  default interface Course {
+export default class Course {
   id: number;
   title: string;
   creationDate: string;

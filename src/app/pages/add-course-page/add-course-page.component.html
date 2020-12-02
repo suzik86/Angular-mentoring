@@ -2,17 +2,17 @@
 
   <mat-form-field appearance="outline" class="field">
     <mat-label>Title:</mat-label>
-    <input matInput [(ngModel)]='title' name='title'>
+    <input matInput [(ngModel)]='course.title' name='title'>
   </mat-form-field>
 
   <mat-form-field appearance="outline" class="field">
     <mat-label>Description:</mat-label>
-    <textarea matInput placeholder="Course description" [(ngModel)]='description' name='description'></textarea>
+    <textarea matInput placeholder="Course description" [(ngModel)]='course.description' name='description'></textarea>
   </mat-form-field>
 
-  <app-date [creationDate]='creationDate'></app-date>
+  <app-date [creationDate]='course.creationDate' (update)='changeDate($event)'></app-date>
 
-  <app-duration [duration]='duration'></app-duration>
+  <app-duration [duration]='course.duration' (update)='changeDuration($event)'></app-duration>
 
   <mat-form-field appearance="outline" class="field">
     <mat-label>Authors:</mat-label>
@@ -21,5 +21,5 @@
 
   <button mat-raised-button color="accent" (click)='onSave()'>Save</button>
   <button mat-raised-button (click)='onCancel()'>Cancel</button>
-  
+
 </form>

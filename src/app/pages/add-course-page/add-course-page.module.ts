@@ -6,6 +6,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { AddCoursePageComponent } from './add-course-page.component';
 import { DateComponent } from './components/date/date.component';
 import { DurationComponent } from './components/duration/duration.component';
+import { AddCoursePageRoutingModule } from './add-course-page-routing.module';
 
 @NgModule({
   imports: [
@@ -13,6 +14,7 @@ import { DurationComponent } from './components/duration/duration.component';
     SharedModule,
     MatButtonModule,
     MatInputModule,
+    AddCoursePageRoutingModule,
   ],
   declarations: [
     AddCoursePageComponent,

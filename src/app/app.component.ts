@@ -19,8 +19,4 @@ export class AppComponent {
     return this.authenticationService.isAuthenticated;
   }
 
-  get isCourseCreation(): boolean {
-    return this.coursesService.isCourseCreation;
-  }
-
 }

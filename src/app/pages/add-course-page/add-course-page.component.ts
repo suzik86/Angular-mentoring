@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CoursesService } from '../courses-page/courses.service';
+import Course from '../../pages/courses-page/components/course/course.types';
+
 
 @Component({
   selector: 'app-add-course-page',
@@ -7,23 +10,44 @@ import { CoursesService } from '../courses-page/courses.service';
   styleUrls: ['./add-course-page.component.scss'],
 })
 export class AddCoursePageComponent {
-  title = '';
-  creationDate = '';
-  duration = '';
-  description = '';
+  course: Course = null;
 
-  constructor(private coursesService: CoursesService) {}
+  isEdit = false;
+
+  constructor(
+    private coursesService: CoursesService,
+    private activatedRouter: ActivatedRoute,
+    private router: Router,
+    ) {
+      if (activatedRouter.snapshot.paramMap.get('id')) {
+
+        this.isEdit = true;
+        const id = parseInt(activatedRouter.snapshot.paramMap.get('id'), 10);
+        this.course = this.coursesService.getItemById(id);
+      } else {
+        this.course = new Course();
+      }
+      localStorage.setItem('editableCourseName', this.course.title);
+  }
+
+  changeDuration(newValue): void {
+    this.course.duration = newValue;
+  }
+
+  changeDate(newValue): void {
+    this.course.creationDate = newValue;
+  }
 
   onSave(): void {
-    console.log(this.title, 'was created!');
+    if (this.isEdit) {
+      this.coursesService.updateItem(this.course);
+    } else {
+      this.coursesService.createCourse(this.course);
+    }
+    this.router.navigate(['/courses']);
   }
 
   onCancel(): void {
-    console.log('Changes was not saved!');
-    this.title = '';
-    this.creationDate = '';
-    this.duration = '';
-    this.description = '';
-    this.coursesService.isCourseCreation = false;
+    this.router.navigate(['/courses']);
   }
 }

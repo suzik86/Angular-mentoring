@@ -10,6 +10,8 @@ import { CoursesPageModule } from './pages/courses-page/courses-page.module';
 import { LoginPageModule } from './pages/login-page/login-page.module';
 import { SharedModule } from './shared/shared.module';
 import { AddCoursePageModule } from './pages/add-course-page/add-course-page.module';
+import { AuthModule } from './auth/auth.module';
+import { NotFoundModule } from './pages/not-found/not-found.module';
 
 @NgModule({
   declarations: [
@@ -25,6 +27,8 @@ import { AddCoursePageModule } from './pages/add-course-page/add-course-page.mod
     LoginPageModule,
     WebStorageModule,
     AddCoursePageModule,
+    AuthModule,
+    NotFoundModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
