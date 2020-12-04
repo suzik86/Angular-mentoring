@@ -57,9 +57,9 @@ describe('CourseComponent', () => {
     ngOnInit(): void {
       this.course = {
         id: 3,
-        title: 'Ethical, Professional and Legal Standards in Psychology',
-        creationDate: '12/02/2020',
-        duration: '3 weeks',
+        name: 'Ethical, Professional and Legal Standards in Psychology',
+        date: '12/02/2020',
+        length: '3 weeks',
         description: 'Ethical issues relevant to teaching, research, and application of psychology are reviewed, with an emphasis on the principles of the American Psychological Associations ethics code and related professional standards and guidelines.',
       };
     }
@@ -104,9 +104,9 @@ describe('CourseComponent', () => {
     courseEl = courseDe.nativeElement;
     expectedCourse = {
       id: 3,
-      title: 'Ethical, Professional and Legal Standards in Psychology',
-      creationDate: '12/02/2020',
-      duration: '3 weeks',
+      name: 'Ethical, Professional and Legal Standards in Psychology',
+      date: '12/02/2020',
+      length: '3 weeks',
       description: 'Ethical issues relevant to teaching, research, and application of psychology are reviewed, with an emphasis on the principles of the American Psychological Associations ethics code and related professional standards and guidelines.',
     };
     component.course = expectedCourse;

@@ -1,8 +1,9 @@
 export default class Course {
   id: number;
-  title: string;
-  creationDate: string;
-  duration: string;
+  name: string;
+  date: string;
+  length: string;
   description: string;
-  topRated?: boolean;
+  isTopRated?: boolean;
+  authors?: any;
 }

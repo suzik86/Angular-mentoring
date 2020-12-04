@@ -21,7 +21,7 @@ export class CourseComponent implements OnInit{
   ) { }
 
   ngOnInit(): void {
-    this.creationDate = this.course.creationDate;
+    this.creationDate = this.course.date;
   }
 
   openDialog(): void {

@@ -1,7 +1,9 @@
 export default interface User {
   id: number;
-  firstName: string;
-  lastName: string;
+  name: {
+    first: string;
+    last: string;
+  };
   login: string;
-  password: string;
+  fakeToken: string;
 }

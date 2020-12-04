@@ -1,6 +1,6 @@
-<ng-container *ngIf="filteredCourses.length; else noDataMessage">
+<ng-container *ngIf="coursesList.length; else noDataMessage">
   <ul>
-    <li *ngFor="let course of filteredCourses | orderBy: 'creationDate' : 'ASC'">
+    <li *ngFor="let course of coursesList">
       <app-course [course]="course"></app-course>
     </li>
   </ul>
