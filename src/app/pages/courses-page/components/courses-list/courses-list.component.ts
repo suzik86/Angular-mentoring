@@ -1,4 +1,5 @@
-import { Component, Input, OnChanges, OnInit, SimpleChange, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { CoursesService } from '../../courses.service';
 import Course from '../course/course.types';
 
@@ -7,18 +8,17 @@ import Course from '../course/course.types';
   templateUrl: './courses-list.component.html',
   styleUrls: ['./courses-list.component.scss'],
 })
-export class CoursesListComponent implements OnInit, OnChanges {
+export class CoursesListComponent implements OnInit, OnChanges, OnDestroy {
   start = 0;
   count = 5;
   sort = 'date';
   @Input() textFragment = '';
   coursesList: Array<Course> = [];
+  private subs = new Subscription();
 
   constructor(
     public coursesService: CoursesService,
-  ) {
-    this.coursesService.coursesChanged.subscribe(() => this.loadData());
-  }
+  ) { }
 
   async onSearch(text): Promise<void> {
     this.textFragment = text;
@@ -26,11 +26,11 @@ export class CoursesListComponent implements OnInit, OnChanges {
   }
 
   async ngOnInit(): Promise<void> {
+    this.subs.add(this.coursesService.coursesChanged.subscribe(() => this.loadData()));
     await this.loadData();
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    const item: SimpleChange = changes.item;
+  ngOnChanges(): void {
     this.loadData();
   }
 
@@ -41,6 +41,10 @@ export class CoursesListComponent implements OnInit, OnChanges {
   async loadMore(): Promise<void> {
     this.start += 5;
     this.coursesList = this.coursesList.concat(await this.coursesService.getCourses(this.start, this.count, this.sort, this.textFragment));
+  }
+
+  ngOnDestroy(): void {
+    this.subs.unsubscribe();
   }
 
 }

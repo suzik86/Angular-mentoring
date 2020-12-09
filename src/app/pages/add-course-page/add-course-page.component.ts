@@ -21,8 +21,7 @@ export class AddCoursePageComponent implements OnInit {
     ) {
   }
 
-  async ngOnInit(): Promise<void> {
-
+  ngOnInit(): void {
     this.course = this.activatedRouter.snapshot.data.course;
     if (this.course) {
       this.isEdit = true;
