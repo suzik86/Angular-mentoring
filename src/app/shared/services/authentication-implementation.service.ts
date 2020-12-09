@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 import { LocalStorage } from 'ngx-store';
 import User from '../components/user/user.types';
 import { AuthenticationService } from './authentication.service';
@@ -10,43 +11,35 @@ import { AuthenticationService } from './authentication.service';
 export class AuthenticationImplementationService implements AuthenticationService{
   @LocalStorage() user: User;
   @LocalStorage() token: string;
-  private users: Array<User> = [
-    {
-      id: 1,
-      firstName: 'Den',
-      lastName: 'Street',
-      login: 'star',
-      password: '123rhj',
-    },
-    {
-      id: 2,
-      firstName: 'Vera',
-      lastName: 'White',
-      login: 'kitty',
-      password: '2608',
-    },
-  ];
 
   constructor(
     private router: Router,
+    private http: HttpClient,
   ) {}
 
   get currentUser(): User {
+
     return this.user;
   }
 
   get isAuthenticated(): boolean {
+
     return !!this.token;
   }
 
-  login(login, password): void {
-    if (this.users.find(item => item.login === login) && this.users.find(item => item.password === password)) {
-      this.token = 'asdasdasdasda';
-      const index = this.users.findIndex(item => item.login === login);
-      this.user = this.users[index];
+  async login(login, password): Promise<boolean> {
+    const {token} = await this.http.post<any>('http://localhost:3004/auth/login', {login, password}).toPromise();
+    this.token = token;
+    this.user = await this.getUser();
+
+    if (this.user) {
       console.log('Succesfully logined user with password', this.user);
+
+      return true;
     } else {
       console.log('Login failed!');
+
+      return false;
     }
   }
 
@@ -56,7 +49,7 @@ export class AuthenticationImplementationService implements AuthenticationServic
     this.router.navigate(['/login']);
   }
 
-  getUsersInfo(): User {
-    return this.user;
+  async getUser(): Promise<User> {
+    return await this.http.post<User>('http://localhost:3004/auth/userinfo', {token: this.token}).toPromise();
   }
 }

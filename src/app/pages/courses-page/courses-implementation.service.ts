@@ -1,60 +1,43 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import Course from './components/course/course.types';
 import { CoursesService } from './courses.service';
+
+const COURSES_ENDPOINT = 'courses';
+const BACKEND_URL = 'http://localhost:3004/';
 
 @Injectable({
   providedIn: 'root',
 })
-export class CoursesImplementationService  implements CoursesService{
-  private courseCreation = false;
-  private courses: Array<Course> = [
-    {
-      id: 1,
-      title: 'Introduction to Biological Anthropology',
-      creationDate: '2020-10-21',
-      duration: '200',
-      description: 'Anthropological perspective on biological variation in human and non-human primates in the past and the present; examines the interaction between biology and culture in the evolution of human society. Evolution and behavior of non-human primates are examined for what they reveal about the human condition.',
-      topRated: true,
-    },
-    {
-      id: 2,
-      title: 'Forms and Ideas in Humanities',
-      creationDate: '2020-11-05',
-      duration: '20',
-      description: 'Prerequisite: Multiple Measures Placement in GE-level writing or completion of the lower division writing requirement. Introductory course provides instruction in the interdisciplinary analysis and interpretation of meaning in art, music and literature ,and in the understanding of philosophical ideas in their own right and as they influence styles and themes in works of art. ',
-      topRated: false,
-    },
-    {
-      id: 3,
-      title: 'Ethical, Professional and Legal Standards in Psychology ',
-      creationDate: '2020-12-06',
-      duration: '700',
-      description: 'Ethical issues relevant to teaching, research, and application of psychology are reviewed, with an emphasis on the principles of the American Psychological Associations ethics code and related professional standards and guidelines.',
-      topRated: true,
-    },
-  ];
+export class CoursesImplementationService  implements CoursesService {
+  public coursesChanged: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-  get list(): Array<Course> {
-    return this.courses;
+  constructor(private http: HttpClient) {}
+
+  async getCourses(start: number, count: number, sort?: string, textFragment?: string): Promise<Course[]> {
+    const params = new HttpParams()
+                .set('start', start.toString())
+                .set('count', count.toString())
+                .set('sort', sort)
+                .set('textFragment', textFragment);
+
+    return await this.http.get<Course[]>(BACKEND_URL + COURSES_ENDPOINT, {params}).toPromise();
   }
 
-  createCourse(course): void {
-    course.id = this.courses.length + 1;
-    this.courses.push(course);
+  async createCourse(course): Promise<void> {
+    await this.http.post<void>(BACKEND_URL + COURSES_ENDPOINT, course).toPromise();
   }
 
-  getItemById(id): Course {
-    return this.courses.find(course => course.id === id);
+  async getItemById(id): Promise<Course> {
+    return await this.http.get<Course>(`${BACKEND_URL}${COURSES_ENDPOINT}/${id}`).toPromise();
   }
 
-  updateItem(course): void {
-    const index = this.courses.findIndex(item => item.id === course.id);
-    if (index !== -1) {
-      this.courses[index] = course;
-    }
+  async updateItem(course): Promise<void> {
+    await this.http.patch<void>(`${BACKEND_URL}${COURSES_ENDPOINT}/${course.id}`, course).toPromise();
   }
 
-  removeItem(id): void {
-    this.courses = this.courses.filter(item => item.id !== id);
+  async removeItem(id): Promise<void> {
+    await this.http.delete<void>(`${BACKEND_URL}${COURSES_ENDPOINT}/${id}`).toPromise();
+    this.coursesChanged.emit(true);
   }
 }

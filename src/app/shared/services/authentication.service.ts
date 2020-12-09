@@ -5,13 +5,14 @@ import User from '../components/user/user.types';
   providedIn: 'root',
 })
 export abstract class AuthenticationService {
+  token: string;
   abstract get currentUser(): User;
 
   abstract get isAuthenticated(): boolean;
 
-  abstract login(login: string, password: string): void;
+  abstract async login(login: string, password: string): Promise<boolean>;
 
   abstract logout(): void;
 
-  abstract getUsersInfo(): User;
+  abstract async getUser(): Promise<User>;
 }

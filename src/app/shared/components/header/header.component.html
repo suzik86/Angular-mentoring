@@ -4,7 +4,7 @@
     <h1>VIDEO COURSE</h1>
   </a>
   <div class="user-info" *ngIf="authenticationService.isAuthenticated">
-    <span>{{authenticationService.currentUser.firstName}}</span>
+    <span>{{userName}}</span>
     <button mat-button class="log-off-btn" (click)="authenticationService.logout()">Log off</button>
   </div>
   <div class="user-info" *ngIf="!authenticationService.isAuthenticated">

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CoursesService } from '../courses-page/courses.service';
 import Course from '../../pages/courses-page/components/course/course.types';
@@ -9,7 +9,7 @@ import Course from '../../pages/courses-page/components/course/course.types';
   templateUrl: './add-course-page.component.html',
   styleUrls: ['./add-course-page.component.scss'],
 })
-export class AddCoursePageComponent {
+export class AddCoursePageComponent implements OnInit {
   course: Course = null;
 
   isEdit = false;
@@ -19,23 +19,24 @@ export class AddCoursePageComponent {
     private activatedRouter: ActivatedRoute,
     private router: Router,
     ) {
-      if (activatedRouter.snapshot.paramMap.get('id')) {
+  }
 
-        this.isEdit = true;
-        const id = parseInt(activatedRouter.snapshot.paramMap.get('id'), 10);
-        this.course = this.coursesService.getItemById(id);
-      } else {
-        this.course = new Course();
-      }
-      localStorage.setItem('editableCourseName', this.course.title);
+  ngOnInit(): void {
+    this.course = this.activatedRouter.snapshot.data.course;
+    if (this.course) {
+      this.isEdit = true;
+      localStorage.setItem('editableCourseName', this.course.name);
+    } else {
+      this.course = new Course();
+    }
   }
 
   changeDuration(newValue): void {
-    this.course.duration = newValue;
+    this.course.length = newValue;
   }
 
   changeDate(newValue): void {
-    this.course.creationDate = newValue;
+    this.course.date = newValue;
   }
 
   onSave(): void {

@@ -8,7 +8,7 @@ import { CoursesListComponent } from './courses-list.component';
 @Pipe({name: 'pipename'})
 class MockPipe implements PipeTransform {
     transform(items: Array<Course>, searchText: string): Array<Course> {
-      return items.filter(i => i.title === searchText);
+      return items.filter(i => i.name === searchText);
     }
 }
 

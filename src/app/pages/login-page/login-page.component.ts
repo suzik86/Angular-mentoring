@@ -8,20 +8,19 @@ import { AuthenticationService } from '../../shared/services/authentication.serv
   styleUrls: ['./login-page.component.scss'],
 })
 export class LoginPageComponent {
-  login: string;
-  password: string;
+  login = 'flastname';
+  password = 'flastname';
 
   constructor(
     private authenticationService: AuthenticationService,
     private router: Router,
   ) {}
 
-  onLogin(): void {
-    this.authenticationService.login(this.login, this.password);
-    if (this.authenticationService.isAuthenticated) {
+  async onLogin(): Promise<void> {
+    const logined = await this.authenticationService.login(this.login, this.password);
+    if (logined) {
       this.router.navigate(['/courses']);
-    }
-    if (!this.authenticationService.isAuthenticated) {
+    } else {
       this.login = '';
       this.password = '';
     }
