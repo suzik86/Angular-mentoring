@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { AuthenticationService } from '../../services/authentication.service';
 
 @Component({
@@ -7,15 +8,24 @@ import { AuthenticationService } from '../../services/authentication.service';
   styleUrls: ['./header.component.scss'],
 })
 
-export class HeaderComponent implements OnInit{
+export class HeaderComponent implements OnInit, OnDestroy {
   userName: string;
+  public userData$: Subscription;
+  public userData = null;
 
-  constructor(
-    public authenticationService: AuthenticationService,
-  ) {}
+  constructor( public authenticationService: AuthenticationService ) { }
 
   ngOnInit(): void {
-    this.userName = `${this.authenticationService.currentUser?.name.first} ${this.authenticationService.currentUser?.name.last}`;
+    this.userData$ = this.authenticationService.userData$.subscribe(
+      userData$ => {
+        this.userData = userData$;
+        this.userName = `${this.userData?.name.first} ${this.userData?.name.last}`;
+      },
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.userData$.unsubscribe();
   }
 
 }

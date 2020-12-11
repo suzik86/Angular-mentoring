@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import User from '../components/user/user.types';
 
 @Injectable({
@@ -6,6 +7,9 @@ import User from '../components/user/user.types';
 })
 export abstract class AuthenticationService {
   token: string;
+
+  abstract get userData$(): Observable<User>;
+
   abstract get currentUser(): User;
 
   abstract get isAuthenticated(): boolean;

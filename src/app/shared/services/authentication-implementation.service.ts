@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { LocalStorage } from 'ngx-store';
 import User from '../components/user/user.types';
 import { AuthenticationService } from './authentication.service';
+import { SpinnerService } from '../../spinner/spinner.service';
 
 @Injectable({
   providedIn: 'root',
@@ -11,11 +13,20 @@ import { AuthenticationService } from './authentication.service';
 export class AuthenticationImplementationService implements AuthenticationService{
   @LocalStorage() user: User;
   @LocalStorage() token: string;
+  private userInfo$: BehaviorSubject<any>;
 
   constructor(
     private router: Router,
     private http: HttpClient,
-  ) {}
+    private spinnerService: SpinnerService,
+  ) {
+    this.userInfo$ = new BehaviorSubject(this.user);
+  }
+
+  get userData$(): Observable<User> {
+
+    return this.userInfo$.asObservable();
+  }
 
   get currentUser(): User {
 
@@ -34,6 +45,7 @@ export class AuthenticationImplementationService implements AuthenticationServic
 
     if (this.user) {
       console.log('Succesfully logined user with password', this.user);
+      this.userInfo$.next(this.user);
 
       return true;
     } else {
@@ -50,6 +62,8 @@ export class AuthenticationImplementationService implements AuthenticationServic
   }
 
   async getUser(): Promise<User> {
-    return await this.http.post<User>('http://localhost:3004/auth/userinfo', {token: this.token}).toPromise();
+    const user = await this.http.post<User>('http://localhost:3004/auth/userinfo', {token: this.token}).toPromise();
+
+    return user;
   }
 }
