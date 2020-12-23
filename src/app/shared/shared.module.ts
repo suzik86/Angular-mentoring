@@ -14,6 +14,8 @@ import { FilterPipe } from './pipes/filter.pipe';
 import { OrderByPipe } from './pipes/order-by.pipe';
 import { AuthenticationService } from './services/authentication.service';
 import { AuthenticationImplementationService } from './services/authentication-implementation.service';
+import { SpinnerOverlayComponent } from './components/spinner/spinner-overlay.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 
 @NgModule({
@@ -21,6 +23,7 @@ import { AuthenticationImplementationService } from './services/authentication-i
     CommonModule,
     MatButtonModule,
     RouterModule,
+    MatProgressSpinnerModule,
    ],
   declarations: [
     HeaderComponent,
@@ -30,6 +33,7 @@ import { AuthenticationImplementationService } from './services/authentication-i
     DurationPipe,
     OrderByPipe,
     UserComponent,
+    SpinnerOverlayComponent,
   ],
   exports: [
     HeaderComponent,
@@ -42,6 +46,7 @@ import { AuthenticationImplementationService } from './services/authentication-i
     CommonModule,
     FormsModule,
     MatButtonModule,
+    SpinnerOverlayComponent,
   ],
   providers: [
     FilterPipe,

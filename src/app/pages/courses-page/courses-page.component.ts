@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { CoursesService } from './courses.service';
 
 @Component({
   selector: 'app-courses-page',
@@ -7,6 +8,15 @@ import { Component } from '@angular/core';
 })
 export class CoursesPageComponent {
   query = '';
+  loading = false;
+
+  constructor(
+    public coursesService: CoursesService,
+  ) { }
+
+  ngOnInit() {
+    this.coursesService.loading.subscribe(state => this.loading = state);
+  }
 
   setQuery(text: string): void {
     this.query = text;

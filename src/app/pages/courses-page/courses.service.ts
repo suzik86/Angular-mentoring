@@ -1,18 +1,25 @@
-import { EventEmitter, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import Course from '../../pages/courses-page/components/course/course.types';
 
 @Injectable({
   providedIn: 'root',
 })
 export abstract class CoursesService {
-  public coursesChanged: EventEmitter<boolean> = new EventEmitter<boolean>();
-  abstract async getCourses(start: number, count: number, sort?: string, textFragment?: string): Promise<Course[]>;
+  courses;
+  loading;
+  textFragment;
 
-  abstract async createCourse(course): Promise<void>;
+  abstract loadAll();
 
-  abstract async getItemById(id): Promise<Course>;
+  abstract getCourses(start: number, count: number, sort?: string, textFragment?: string);
 
-  abstract async updateItem(course): Promise<void>;
+  abstract createCourse(course: Course);
 
-  abstract async removeItem(id): Promise<void>;
+  abstract getItemById(id);
+
+  abstract updateItem(course: Course);
+
+  abstract removeItem(id);
+
+  abstract loadMoreCourses();
 }

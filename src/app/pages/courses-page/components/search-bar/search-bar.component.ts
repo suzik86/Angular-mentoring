@@ -1,6 +1,7 @@
-import { Component,  EventEmitter, OnInit, Output } from '@angular/core';
+import { Component,  OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
-import { distinctUntilChanged, debounceTime, switchMap, tap } from 'rxjs/operators';
+import { distinctUntilChanged, debounceTime, tap } from 'rxjs/operators';
+import { CoursesService } from '../../courses.service';
 
 @Component({
   selector: 'app-search-bar',
@@ -8,17 +9,20 @@ import { distinctUntilChanged, debounceTime, switchMap, tap } from 'rxjs/operato
   styleUrls: ['./search-bar.component.scss'],
 })
 export class SearchBarComponent implements OnInit{
-  @Output() searchCourses = new EventEmitter();
-
   searchValue = '';
   searchTextChanged = new Subject<string>();
   subscription;
+
+  constructor(
+    public coursesService: CoursesService,
+  ) { }
 
   ngOnInit(): void {
     this.subscription = this.searchTextChanged.pipe(
       debounceTime(1000),
       distinctUntilChanged(),
-      tap(search => this.searchCourses.emit(this.searchValue)),
+      tap(search => this.coursesService.textFragment = this.searchValue),
+      tap(search => this.coursesService.loadAll()),
      ).subscribe((res) => {
        console.log(res);
      });

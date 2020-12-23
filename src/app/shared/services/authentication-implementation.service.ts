@@ -5,7 +5,6 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { LocalStorage } from 'ngx-store';
 import User from '../components/user/user.types';
 import { AuthenticationService } from './authentication.service';
-import { SpinnerService } from '../../spinner/spinner.service';
 
 @Injectable({
   providedIn: 'root',
@@ -18,7 +17,6 @@ export class AuthenticationImplementationService implements AuthenticationServic
   constructor(
     private router: Router,
     private http: HttpClient,
-    private spinnerService: SpinnerService,
   ) {
     this.userInfo$ = new BehaviorSubject(this.user);
   }

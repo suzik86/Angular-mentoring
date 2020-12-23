@@ -1,6 +1,6 @@
-<ng-container *ngIf="coursesList.length; else noDataMessage">
+<ng-container *ngIf="coursesList; else noDataMessage">
   <ul>
-    <li *ngFor="let course of coursesList">
+    <li *ngFor="let course of coursesList | async">
       <app-course [course]="course"></app-course>
     </li>
   </ul>
