@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
+import { BehaviorSubject, Observable } from 'rxjs';
 import Course from './components/course/course.types';
 import { CoursesService } from './courses.service';
-import { BehaviorSubject } from 'rxjs';
 
 const COURSES_ENDPOINT = 'courses';
 const BACKEND_URL = 'http://localhost:3004/';
@@ -12,9 +12,9 @@ const BACKEND_URL = 'http://localhost:3004/';
 })
 export class CoursesImplementationService  implements CoursesService {
   private _courses = new BehaviorSubject<Course[]>([]);
-  private _loading = new BehaviorSubject<Boolean>(false);
+  private _loading = new BehaviorSubject<boolean>(false);
   private dataStore: { courses: Course[] } = { courses: [] };
-  
+
   start = 0;
   count = 5;
   sort = 'date';
@@ -22,15 +22,15 @@ export class CoursesImplementationService  implements CoursesService {
 
   constructor(private http: HttpClient) { }
 
-  get courses() {
+  get courses(): Observable<Course[]> {
     return this._courses.asObservable();
   }
 
-  get loading() {
+  get loading(): Observable<boolean> {
     return this._loading.asObservable();
   }
 
-  loadAll() {
+  loadAll(): void {
     this._loading.next(true);
 
     this.getCourses(this.start, this.count, this.sort, this.textFragment).subscribe(
@@ -39,12 +39,12 @@ export class CoursesImplementationService  implements CoursesService {
         this._courses.next(Object.assign({}, this.dataStore).courses);
         this._loading.next(false);
       },
-      error => console.log('Could not load courses.')
-    );    
+      error => console.log('Could not load courses.'),
+    );
   }
 
 
-  getCourses(start: number, count: number, sort?: string, textFragment?: string) {
+  getCourses(start: number, count: number, sort?: string, textFragment?: string): Observable<Course[]> {
     const params = new HttpParams()
                 .set('start', start.toString())
                 .set('count', count.toString())
@@ -54,12 +54,11 @@ export class CoursesImplementationService  implements CoursesService {
     return this.http.get<Course[]>(BACKEND_URL + COURSES_ENDPOINT, {params});
   }
 
-  getItemById(id: number | string) {
+  getItemById(id: number | string): void {
     this._loading.next(true);
     this.http.get<Course>(`${BACKEND_URL}${COURSES_ENDPOINT}/${id}`).subscribe(
       data => {
         let notFound = true;
-
 
         this.dataStore.courses.forEach((item, index) => {
           if (item.id === data.id) {
@@ -75,14 +74,11 @@ export class CoursesImplementationService  implements CoursesService {
         this._courses.next(Object.assign({}, this.dataStore).courses);
         this._loading.next(false);
       },
-      error => console.log('Could not load course.')
+      error => console.log('Could not load course.'),
     );
   }
-  // async getItemById(id): Promise<Course> {
-  //   return await this.http.get<Course>(`${BACKEND_URL}${COURSES_ENDPOINT}/${id}`).toPromise();
-  // }
 
-  createCourse(course: Course) {
+  createCourse(course: Course): void {
     this._loading.next(true);
     this.http
       .post<Course>(BACKEND_URL + COURSES_ENDPOINT, course)
@@ -92,11 +88,11 @@ export class CoursesImplementationService  implements CoursesService {
           this._courses.next(Object.assign({}, this.dataStore).courses);
           this._loading.next(false);
         },
-        error => console.log('Could not create course.')
+        error => console.log('Could not create course.'),
       );
   }
-  
-  updateItem(course: Course) {
+
+  updateItem(course: Course): void {
     this.http
       .put<Course>(`${BACKEND_URL}${COURSES_ENDPOINT}/${course.id}`, course)
       .subscribe(
@@ -109,14 +105,11 @@ export class CoursesImplementationService  implements CoursesService {
 
           this._courses.next(Object.assign({}, this.dataStore).courses);
         },
-        error => console.log('Could not update course.')
+        error => console.log('Could not update course.'),
       );
   }
-  // async updateItem(course): Promise<void> {
-  //   await this.http.patch<void>(`${BACKEND_URL}${COURSES_ENDPOINT}/${course.id}`, course).toPromise();
-  // }
 
-  removeItem(courseId: number) {
+  removeItem(courseId: number): void {
     this._loading.next(true);
     this.http.delete(`${BACKEND_URL}${COURSES_ENDPOINT}/${courseId}`).subscribe(
       response => {
@@ -129,11 +122,11 @@ export class CoursesImplementationService  implements CoursesService {
         this._courses.next(Object.assign({}, this.dataStore).courses);
         this._loading.next(false);
       },
-      error => console.log('Could not delete course.')
+      error => console.log('Could not delete course.'),
     );
   }
 
-  loadMoreCourses() {
+  loadMoreCourses(): void {
     this._loading.next(true);
     this.start += 5;
     this.getCourses(this.start, this.count, this.sort, this.textFragment).subscribe(
@@ -142,8 +135,7 @@ export class CoursesImplementationService  implements CoursesService {
         this._courses.next(Object.assign({}, this.dataStore).courses);
         this._loading.next(false);
       },
-      error => console.log('Could not load courses.')
-    );    
+      error => console.log('Could not load courses.'),
+    );
   }
-  
 }

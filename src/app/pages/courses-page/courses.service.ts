@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import Course from '../../pages/courses-page/components/course/course.types';
 
 @Injectable({
@@ -9,17 +10,17 @@ export abstract class CoursesService {
   loading;
   textFragment;
 
-  abstract loadAll();
+  abstract loadAll(): void;
 
-  abstract getCourses(start: number, count: number, sort?: string, textFragment?: string);
+  abstract getCourses(start: number, count: number, sort?: string, textFragment?: string): Observable<Course[]>;
 
-  abstract createCourse(course: Course);
+  abstract createCourse(course: Course): void;
 
-  abstract getItemById(id);
+  abstract getItemById(id): void;
 
-  abstract updateItem(course: Course);
+  abstract updateItem(course: Course): void;
 
-  abstract removeItem(id);
+  abstract removeItem(id): void;
 
-  abstract loadMoreCourses();
+  abstract loadMoreCourses(): void;
 }

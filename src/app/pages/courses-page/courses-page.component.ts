@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CoursesService } from './courses.service';
 
 @Component({
@@ -6,7 +6,7 @@ import { CoursesService } from './courses.service';
   templateUrl: './courses-page.component.html',
   styleUrls: ['./courses-page.component.scss'],
 })
-export class CoursesPageComponent {
+export class CoursesPageComponent implements OnInit{
   query = '';
   loading = false;
 
@@ -14,7 +14,7 @@ export class CoursesPageComponent {
     public coursesService: CoursesService,
   ) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.coursesService.loading.subscribe(state => this.loading = state);
   }
 

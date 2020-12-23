@@ -9,7 +9,7 @@ import { CoursesService } from './pages/courses-page/courses.service';
 })
 export class AppComponent {
   title = 'my-app';
-  
+
   constructor(
     public authenticationService: AuthenticationService,
     public coursesService: CoursesService,

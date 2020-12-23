@@ -9,17 +9,17 @@ import Course from '../course/course.types';
 })
 export class CoursesListComponent implements OnInit {
   coursesList: Array<Course> = [];
-  
+
   constructor(
     public coursesService: CoursesService,
   ) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.coursesList = this.coursesService.courses;
     this.coursesService.loadAll();
   }
 
-  loadMore() {
-    this.coursesService.loadMoreCourses();    
+  loadMore(): void {
+    this.coursesService.loadMoreCourses();
   }
 }

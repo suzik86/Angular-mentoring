@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 
 import { MatButtonModule } from '@angular/material/button';
 import { RouterModule } from '@angular/router';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -15,7 +16,6 @@ import { OrderByPipe } from './pipes/order-by.pipe';
 import { AuthenticationService } from './services/authentication.service';
 import { AuthenticationImplementationService } from './services/authentication-implementation.service';
 import { SpinnerOverlayComponent } from './components/spinner/spinner-overlay.component';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 
 @NgModule({
