@@ -1,4 +1,4 @@
-<form class="form">
+<form class="form" *ngIf="course" >
 
   <mat-form-field appearance="outline" class="field">
     <mat-label>Title:</mat-label>
@@ -23,3 +23,5 @@
   <button mat-raised-button (click)='onCancel()'>Cancel</button>
 
 </form>
+
+<app-spinner-overlay *ngIf='loading'></app-spinner-overlay>

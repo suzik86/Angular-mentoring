@@ -10,9 +10,8 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanDeactivate<u
   constructor(
     private authService: AuthenticationService,
     private router: Router,
-    ) {
+    ) {}
 
-  }
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
@@ -20,6 +19,7 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanDeactivate<u
 
     return this.router.parseUrl('/login');
   }
+
   canActivateChild(
     childRoute: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {

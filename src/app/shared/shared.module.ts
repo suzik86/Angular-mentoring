@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 
 import { MatButtonModule } from '@angular/material/button';
 import { RouterModule } from '@angular/router';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -14,6 +15,7 @@ import { FilterPipe } from './pipes/filter.pipe';
 import { OrderByPipe } from './pipes/order-by.pipe';
 import { AuthenticationService } from './services/authentication.service';
 import { AuthenticationImplementationService } from './services/authentication-implementation.service';
+import { SpinnerOverlayComponent } from './components/spinner/spinner-overlay.component';
 
 
 @NgModule({
@@ -21,6 +23,7 @@ import { AuthenticationImplementationService } from './services/authentication-i
     CommonModule,
     MatButtonModule,
     RouterModule,
+    MatProgressSpinnerModule,
    ],
   declarations: [
     HeaderComponent,
@@ -30,6 +33,7 @@ import { AuthenticationImplementationService } from './services/authentication-i
     DurationPipe,
     OrderByPipe,
     UserComponent,
+    SpinnerOverlayComponent,
   ],
   exports: [
     HeaderComponent,
@@ -42,6 +46,7 @@ import { AuthenticationImplementationService } from './services/authentication-i
     CommonModule,
     FormsModule,
     MatButtonModule,
+    SpinnerOverlayComponent,
   ],
   providers: [
     FilterPipe,

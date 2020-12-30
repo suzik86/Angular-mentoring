@@ -13,7 +13,7 @@ export class AppComponent {
   constructor(
     public authenticationService: AuthenticationService,
     public coursesService: CoursesService,
-    ) {}
+  ) { }
 
   get isAuthenticated(): boolean {
     return this.authenticationService.isAuthenticated;

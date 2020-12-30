@@ -1,5 +1,4 @@
-import { Component, Input, OnChanges, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
 import { CoursesService } from '../../courses.service';
 import Course from '../course/course.types';
 
@@ -8,43 +7,19 @@ import Course from '../course/course.types';
   templateUrl: './courses-list.component.html',
   styleUrls: ['./courses-list.component.scss'],
 })
-export class CoursesListComponent implements OnInit, OnChanges, OnDestroy {
-  start = 0;
-  count = 5;
-  sort = 'date';
-  @Input() textFragment = '';
+export class CoursesListComponent implements OnInit {
   coursesList: Array<Course> = [];
-  private subs = new Subscription();
 
   constructor(
     public coursesService: CoursesService,
   ) { }
 
-  async onSearch(text): Promise<void> {
-    this.textFragment = text;
-    await this.loadData();
+  ngOnInit(): void {
+    this.coursesList = this.coursesService.courses;
+    this.coursesService.loadAll();
   }
 
-  async ngOnInit(): Promise<void> {
-    this.subs.add(this.coursesService.coursesChanged.subscribe(() => this.loadData()));
-    await this.loadData();
+  loadMore(): void {
+    this.coursesService.loadMoreCourses();
   }
-
-  ngOnChanges(): void {
-    this.loadData();
-  }
-
-  async loadData(): Promise<void> {
-    this.coursesList = await this.coursesService.getCourses(this.start, this.count, this.sort, this.textFragment);
-  }
-
-  async loadMore(): Promise<void> {
-    this.start += 5;
-    this.coursesList = this.coursesList.concat(await this.coursesService.getCourses(this.start, this.count, this.sort, this.textFragment));
-  }
-
-  ngOnDestroy(): void {
-    this.subs.unsubscribe();
-  }
-
 }
