@@ -6,7 +6,6 @@ import Course from '../../pages/courses-page/components/course/course.types';
   providedIn: 'root',
 })
 export abstract class CoursesService {
-  courses;
   loading;
   textFragment;
 
@@ -15,8 +14,6 @@ export abstract class CoursesService {
   abstract getCourses(start: number, count: number, sort?: string, textFragment?: string): Observable<Course[]>;
 
   abstract createCourse(course: Course): void;
-
-  abstract getItemById(id): void;
 
   abstract updateItem(course: Course): void;
 

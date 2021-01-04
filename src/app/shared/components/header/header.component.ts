@@ -1,5 +1,8 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Observable, Subscription } from 'rxjs';
+import { AppState } from 'src/app/state/app.state';
+import { selectUser } from 'src/app/state/user/user.selectors';
 import { AuthenticationService } from '../../services/authentication.service';
 
 @Component({
@@ -8,24 +11,28 @@ import { AuthenticationService } from '../../services/authentication.service';
   styleUrls: ['./header.component.scss'],
 })
 
-export class HeaderComponent implements OnInit, OnDestroy {
+export class HeaderComponent implements OnInit {
   userName: string;
   public userData$: Subscription;
   public userData = null;
 
-  constructor( public authenticationService: AuthenticationService ) { }
+  getState: Observable<any>;
+
+  constructor(
+    public authenticationService: AuthenticationService,
+    private store: Store<AppState>,
+  ) {
+    this.getState = this.store.select(selectUser);
+  }
 
   ngOnInit(): void {
-    this.userData$ = this.authenticationService.userData$.subscribe(
-      userData$ => {
-        this.userData = userData$;
+    this.getState.subscribe((state) => {
+      this.userData = state;
+      if (this.userData) {
         this.userName = `${this.userData?.name.first} ${this.userData?.name.last}`;
-      },
-    );
+      } else {
+        this.userName = '';
+      }
+    });
   }
-
-  ngOnDestroy(): void {
-    this.userData$.unsubscribe();
-  }
-
 }

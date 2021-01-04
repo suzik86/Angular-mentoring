@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { Store } from '@ngrx/store';
 import Course from './components/course/course.types';
 import { CoursesService } from './courses.service';
+import { retrievedCoursesList, addCourse, removeCourse, editCourse, retrievedMoreCoursesList } from '../../state/courses/couses.actions';
 
 const COURSES_ENDPOINT = 'courses';
 const BACKEND_URL = 'http://localhost:3004/';
@@ -11,20 +13,15 @@ const BACKEND_URL = 'http://localhost:3004/';
   providedIn: 'root',
 })
 export class CoursesImplementationService  implements CoursesService {
-  private _courses = new BehaviorSubject<Course[]>([]);
   private _loading = new BehaviorSubject<boolean>(false);
-  private dataStore: { courses: Course[] } = { courses: [] };
 
   start = 0;
   count = 5;
   sort = 'date';
   textFragment = '';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private store: Store) { }
 
-  get courses(): Observable<Course[]> {
-    return this._courses.asObservable();
-  }
 
   get loading(): Observable<boolean> {
     return this._loading.asObservable();
@@ -32,17 +29,16 @@ export class CoursesImplementationService  implements CoursesService {
 
   loadAll(): void {
     this._loading.next(true);
+    this.start = 0;
 
     this.getCourses(this.start, this.count, this.sort, this.textFragment).subscribe(
-      data => {
-        this.dataStore.courses = data;
-        this._courses.next(Object.assign({}, this.dataStore).courses);
+      courses => {
+        this.store.dispatch(retrievedCoursesList({ courses }));
         this._loading.next(false);
       },
       error => console.log('Could not load courses.'),
     );
   }
-
 
   getCourses(start: number, count: number, sort?: string, textFragment?: string): Observable<Course[]> {
     const params = new HttpParams()
@@ -54,38 +50,13 @@ export class CoursesImplementationService  implements CoursesService {
     return this.http.get<Course[]>(BACKEND_URL + COURSES_ENDPOINT, {params});
   }
 
-  getItemById(id: number | string): void {
-    this._loading.next(true);
-    this.http.get<Course>(`${BACKEND_URL}${COURSES_ENDPOINT}/${id}`).subscribe(
-      data => {
-        let notFound = true;
-
-        this.dataStore.courses.forEach((item, index) => {
-          if (item.id === data.id) {
-            this.dataStore.courses[index] = data;
-            notFound = false;
-          }
-        });
-
-        if (notFound) {
-          this.dataStore.courses.push(data);
-        }
-
-        this._courses.next(Object.assign({}, this.dataStore).courses);
-        this._loading.next(false);
-      },
-      error => console.log('Could not load course.'),
-    );
-  }
-
   createCourse(course: Course): void {
     this._loading.next(true);
     this.http
       .post<Course>(BACKEND_URL + COURSES_ENDPOINT, course)
       .subscribe(
         data => {
-          this.dataStore.courses.push(data);
-          this._courses.next(Object.assign({}, this.dataStore).courses);
+          this.store.dispatch(addCourse({ course }));
           this._loading.next(false);
         },
         error => console.log('Could not create course.'),
@@ -93,33 +64,22 @@ export class CoursesImplementationService  implements CoursesService {
   }
 
   updateItem(course: Course): void {
+    console.log(course);
     this.http
       .put<Course>(`${BACKEND_URL}${COURSES_ENDPOINT}/${course.id}`, course)
       .subscribe(
         data => {
-          this.dataStore.courses.forEach((t, i) => {
-            if (t.id === data.id) {
-              this.dataStore.courses[i] = data;
-            }
-          });
-
-          this._courses.next(Object.assign({}, this.dataStore).courses);
+          this.store.dispatch(editCourse({ course }));
         },
         error => console.log('Could not update course.'),
       );
   }
 
-  removeItem(courseId: number): void {
+  removeItem(id: number): void {
     this._loading.next(true);
-    this.http.delete(`${BACKEND_URL}${COURSES_ENDPOINT}/${courseId}`).subscribe(
+    this.http.delete(`${BACKEND_URL}${COURSES_ENDPOINT}/${id}`).subscribe(
       response => {
-        this.dataStore.courses.forEach((t, i) => {
-          if (t.id === courseId) {
-            this.dataStore.courses.splice(i, 1);
-          }
-        });
-
-        this._courses.next(Object.assign({}, this.dataStore).courses);
+        this.store.dispatch(removeCourse({ courseId: id }));
         this._loading.next(false);
       },
       error => console.log('Could not delete course.'),
@@ -130,9 +90,8 @@ export class CoursesImplementationService  implements CoursesService {
     this._loading.next(true);
     this.start += 5;
     this.getCourses(this.start, this.count, this.sort, this.textFragment).subscribe(
-      data => {
-        this.dataStore.courses = this.dataStore.courses.concat(data);
-        this._courses.next(Object.assign({}, this.dataStore).courses);
+      courses => {
+        this.store.dispatch(retrievedMoreCoursesList({ courses }));
         this._loading.next(false);
       },
       error => console.log('Could not load courses.'),
