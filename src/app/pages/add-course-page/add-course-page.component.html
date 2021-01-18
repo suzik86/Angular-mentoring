@@ -1,25 +1,25 @@
-<form class="form" *ngIf="course" >
+<form class="form" [formGroup]="form" *ngIf="course" (ngSubmit)='onSave()'>
 
   <mat-form-field appearance="outline" class="field">
     <mat-label>Title:</mat-label>
-    <input matInput [(ngModel)]='course.name' name='name'>
+    <span *ngIf="nameControl.touched && nameControl.errors?.required" class="error">
+      Date is required.
+    </span>
+    <input matInput formControlName="name" name='name'>
   </mat-form-field>
 
   <mat-form-field appearance="outline" class="field">
     <mat-label>Description:</mat-label>
-    <textarea matInput placeholder="Course description" [(ngModel)]='course.description' name='description'></textarea>
+    <textarea formControlName="description" matInput placeholder="Course description" name='description'></textarea>
   </mat-form-field>
 
-  <app-date [creationDate]='course.date' (update)='changeDate($event)'></app-date>
+  <app-date formControlName="date" [formGroup]='form'></app-date>  
 
-  <app-duration [duration]='course.length' (update)='changeDuration($event)'></app-duration>
+  <app-duration formControlName="length"></app-duration> 
 
-  <mat-form-field appearance="outline" class="field">
-    <mat-label>Authors:</mat-label>
-    <input matInput value="">
-  </mat-form-field>
-
-  <button mat-raised-button color="accent" (click)='onSave()'>Save</button>
+  <app-authors formControlName="authors"></app-authors> 
+  
+  <button mat-raised-button color="accent" type="submit" [disabled]="!form.valid">Save</button>
   <button mat-raised-button (click)='onCancel()'>Cancel</button>
 
 </form>

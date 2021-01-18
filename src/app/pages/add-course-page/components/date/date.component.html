@@ -1,4 +1,10 @@
 <mat-form-field appearance="outline" class="field">
   <mat-label>Date:</mat-label>
-  <input matInput [ngModel]='creationDate' name='creationDate' (ngModelChange)="onChange($event)">
+  <span *ngIf="!value && control.touched" class="error">
+    Date is required.
+  </span>
+  <span *ngIf="isIncorrectValue" class="error">
+    Date format is invalid.
+  </span>
+  <input matInput [(ngModel)]='value' name="creationDate" (blur)="onTouch($event)">
 </mat-form-field>

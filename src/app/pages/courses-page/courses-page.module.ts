@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { RouterModule } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
@@ -16,6 +16,7 @@ import { CoursesPageComponent } from './courses-page.component';
 import { CoursesService } from './courses.service';
 import { CoursesImplementationService } from './courses-implementation.service';
 import { CoursesPageRoutingModule } from './courses-page-routing.module';
+import { AuthorsService } from './authors.service';
 
 @NgModule({
   imports: [
@@ -27,6 +28,7 @@ import { CoursesPageRoutingModule } from './courses-page-routing.module';
     MatButtonModule,
     RouterModule,
     CoursesPageRoutingModule,
+    ReactiveFormsModule,
    ],
   declarations: [
     ActionsPanelComponent,
@@ -47,6 +49,7 @@ import { CoursesPageRoutingModule } from './courses-page-routing.module';
   ],
   providers: [
     { provide: CoursesService, useClass: CoursesImplementationService },
+    { provide: AuthorsService},
   ],
 })
 export class CoursesPageModule { }

@@ -1,0 +1,19 @@
+<mat-form-field appearance="outline" class="field duration">
+  <mat-label>Authors:</mat-label>
+  <input matInput (blur)="onTouch($event)" (input)="findAuthors()" [(ngModel)]='filter' autocomplete="off">
+
+  <ul class="find">
+    <li *ngFor="let item of items;" (click)="addAuthor(item)">{{item.name}}</li>
+  </ul>
+
+  <ul class="selected">
+    <li *ngFor="let item of authors;" (click)="removeAuthor(item)">
+      <span>{{item.name}}</span> 
+      <button mat-icon-button color="warn">
+        <mat-icon>clear</mat-icon>
+      </button>
+    </li>
+  </ul>
+
+
+</mat-form-field>

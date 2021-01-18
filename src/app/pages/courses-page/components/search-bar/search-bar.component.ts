@@ -1,4 +1,5 @@
 import { Component,  OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { distinctUntilChanged, debounceTime, tap } from 'rxjs/operators';
 import { CoursesService } from '../../courses.service';
@@ -9,19 +10,24 @@ import { CoursesService } from '../../courses.service';
   styleUrls: ['./search-bar.component.scss'],
 })
 export class SearchBarComponent implements OnInit{
-  searchValue = '';
   searchTextChanged = new Subject<string>();
   subscription;
+  form: FormGroup;
 
   constructor(
     public coursesService: CoursesService,
-  ) { }
+    private _fb: FormBuilder,
+  ) {
+    this.form = this._fb.group({
+      search: [''],
+    });
+  }
 
   ngOnInit(): void {
     this.subscription = this.searchTextChanged.pipe(
       debounceTime(1000),
       distinctUntilChanged(),
-      tap(search => this.coursesService.textFragment = this.searchValue),
+      tap(search => this.coursesService.textFragment = this.form.value.search),
       tap(search => this.coursesService.loadAll()),
      ).subscribe((res) => {
        console.log(res);

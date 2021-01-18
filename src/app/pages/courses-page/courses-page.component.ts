@@ -16,6 +16,7 @@ export class CoursesPageComponent implements OnInit{
 
   ngOnInit(): void {
     this.coursesService.loading.subscribe(state => this.loading = state);
+    this.coursesService.loadAll();
   }
 
   setQuery(text: string): void {
