@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Store, select } from '@ngrx/store';
+import { FormGroup, FormControl, AbstractControl } from '@angular/forms';
+import { Validators } from '@angular/forms';
 import { CoursesService } from '../courses-page/courses.service';
 import Course from '../../pages/courses-page/components/course/course.types';
 import { selectCourses } from '../../state/courses/courses.selectors';
@@ -18,6 +20,7 @@ export class AddCoursePageComponent implements OnInit {
 
   isEdit = false;
   loading = false;
+  form: FormGroup;
 
   constructor(
     private coursesService: CoursesService,
@@ -40,17 +43,29 @@ export class AddCoursePageComponent implements OnInit {
     } else {
       this.course = new Course();
     }
+    this.form = new FormGroup({
+      name: new FormControl(this.course.name, [Validators.required, Validators.maxLength(50)]),
+      description: new FormControl(this.course.description, [Validators.maxLength(500)]),
+      date: new FormControl(this.course.date, [Validators.required]),
+      length: new FormControl(this.course.length),
+      authors: new FormControl(this.course.authors),
+    });
   }
 
-  changeDuration(newValue): void {
-    this.course.length = newValue;
+  get nameControl(): AbstractControl {
+    return this.form.get('name');
   }
 
-  changeDate(newValue): void {
-    this.course.date = newValue;
+  get dateControl(): AbstractControl {
+    return this.form.get('date');
+  }
+
+  get durationControl(): AbstractControl {
+    return this.form.get('duration');
   }
 
   onSave(): void {
+    this.course = Object.assign(this.course, this.form.value);
     if (this.isEdit) {
       this.coursesService.updateItem(this.course);
     } else {

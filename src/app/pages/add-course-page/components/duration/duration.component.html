@@ -1,5 +1,11 @@
 <mat-form-field appearance="outline" class="field duration">
   <mat-label>Duration:</mat-label>
-  <input matInput [ngModel]='duration' name='duration' (ngModelChange)="onChange($event)">
+  <span *ngIf="!duration && control.touched" class="error">
+    Date is required.
+  </span>
+  <span *ngIf="isIncorrectValue" class="error">
+    Only numbers are allowed.
+  </span>  
+  <input matInput [(ngModel)]='duration' name='duration' (blur)="onTouch($event)">
 </mat-form-field>
 <span *ngIf='duration' class="formatted-duration">{{duration |duration}}</span>

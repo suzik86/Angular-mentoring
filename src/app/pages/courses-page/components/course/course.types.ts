@@ -1,3 +1,5 @@
+import Author from './author.types';
+
 export default class Course {
   constructor(course: Course = null) {
     if (course) {
@@ -10,5 +12,5 @@ export default class Course {
   length: string;
   description: string;
   isTopRated?: boolean;
-  authors?: any;
+  authors?: Array<Author>;
 }
