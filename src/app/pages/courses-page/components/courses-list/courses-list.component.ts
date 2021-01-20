@@ -5,7 +5,6 @@ import { CoursesService } from '../../courses.service';
 import Course from '../course/course.types';
 import { selectCourses } from '../../../../state/courses/courses.selectors';
 
-
 @Component({
   selector: 'app-courses-list',
   templateUrl: './courses-list.component.html',

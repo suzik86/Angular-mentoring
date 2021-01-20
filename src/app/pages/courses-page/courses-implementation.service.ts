@@ -64,7 +64,6 @@ export class CoursesImplementationService  implements CoursesService {
   }
 
   updateItem(course: Course): void {
-    console.log(course);
     this.http
       .put<Course>(`${BACKEND_URL}${COURSES_ENDPOINT}/${course.id}`, course)
       .subscribe(

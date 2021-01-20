@@ -6,7 +6,6 @@ import { CoursesService } from '../courses-page/courses.service';
 import Course from '../../pages/courses-page/components/course/course.types';
 import { selectCourses } from '../../state/courses/courses.selectors';
 
-
 @Component({
   selector: 'app-add-course-page',
   templateUrl: './add-course-page.component.html',
