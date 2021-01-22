@@ -1,28 +1,22 @@
-import { Component, OnInit } from '@angular/core';
-import { Store, select } from '@ngrx/store';
-import { Observable } from 'rxjs';
-import { CoursesService } from '../../courses.service';
-import Course from '../course/course.types';
-import { selectCourses } from '../../../../state/courses/courses.selectors';
+import { Component, Input } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { AppState } from 'src/app/state';
+import { LoadCoursesMoreAction } from 'src/app/state/courses/couses.actions';
+import Course from '../../../../state/courses/courses.types';
 
 @Component({
   selector: 'app-courses-list',
   templateUrl: './courses-list.component.html',
   styleUrls: ['./courses-list.component.scss'],
 })
-export class CoursesListComponent implements OnInit {
-  coursesList: Observable<Course[]>;
+export class CoursesListComponent {
+  @Input() coursesList: Course[] = [];
 
   constructor(
-    public coursesService: CoursesService,
-    private store: Store,
+    private store: Store<AppState>,
   ) { }
 
-  ngOnInit(): void {
-    this.coursesList = this.store.pipe(select(selectCourses));
-  }
-
   loadMore(): void {
-    this.coursesService.loadMoreCourses();
+    this.store.dispatch(LoadCoursesMoreAction());
   }
 }

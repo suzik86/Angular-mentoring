@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
-import User from '../components/user/user.types';
+import User from '../../state/user/user.types';
 import { AuthenticationService } from './authentication.service';
 import { login, logout } from '../../state/user/user.actions';
 

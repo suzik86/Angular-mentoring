@@ -1,5 +1,6 @@
 import { createAction, props } from '@ngrx/store';
-import Course from '../../pages/courses-page/components/course/course.types';
+import { CoursesState } from './courses.state';
+import Course from './courses.types';
 
 export const addCourse = createAction(
   '[Courses List] Add Course',
@@ -21,12 +22,38 @@ export const findCourse = createAction(
     props<{ courseId }>(),
 );
 
-export const retrievedCoursesList = createAction(
-  '[Courses List/API] Retrieve Courses Success',
+export const LoadCoursesAction = createAction(
+  '[Courses List/API] Retrieve Courses',
+);
+
+export const SetFilterCoursesAction = createAction(
+  '[Courses List/API] Set Courses filter',
+  props<{ filter: string }>(),
+);
+
+export const FilterCoursesUpdatedAction = createAction(
+  '[Courses List/API] Courses Filter was updated',
+  props<{ state: CoursesState }>(),
+);
+
+export const CoursesListLoadedSuccessfuly = createAction(
+  '[Courses List/API] Retrieved Courses Success',
   props<{ courses: Course[] }>(),
 );
 
-export const retrievedMoreCoursesList = createAction(
-    '[Courses List/API] Retrieve More Courses Success',
-    props<{ courses }>(),
-  );
+export const CoursesListLoadedFailed = createAction(
+  '[Courses List/API] Retrieved Courses Fail',
+);
+
+export const LoadCoursesMoreAction = createAction(
+  '[Courses List/API] Retrieve More Courses',
+);
+
+export const CoursesListMoreLoadedSuccessfuly = createAction(
+  '[Courses List/API] Retrieved Courses More Success',
+  props<{ courses: Course[] }>(),
+);
+
+export const CoursesListMoreLoadedFailed = createAction(
+  '[Courses List/API] Retrieved Courses More Fail',
+);

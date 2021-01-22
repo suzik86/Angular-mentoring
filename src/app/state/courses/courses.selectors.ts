@@ -1,8 +1,17 @@
 import { createSelector } from '@ngrx/store';
-import { AppState } from '../app.state';
-import Course from '../../pages/courses-page/components/course/course.types';
+import { AppState } from '..';
+import { CoursesState } from './courses.state';
+import Course from './courses.types';
 
-export const selectCourses = createSelector(
-  (state: AppState) => state.courses,
-  (courses: Array<Course>) => courses,
+
+export const selectCourses = (state: AppState) => state.courses;
+
+export const selectCoursesList = createSelector(
+  selectCourses,
+  (state: CoursesState) => state.list,
+);
+
+export const selectCourse = createSelector(
+  selectCoursesList,
+  (list: Course[], props) => list.find((course: Course) => course.id === props.id),
 );

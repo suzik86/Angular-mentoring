@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CoursesPageComponent } from './courses-page.component';
 import { CoursesImplementationService } from './courses-implementation.service';
+import { CoursePageResolve } from '../course-page/course.resolver';
 
 const routes: Routes = [
   {
@@ -13,7 +14,7 @@ const routes: Routes = [
     data: {
       breadcrumb: 'New Course',
     },
-    loadChildren: () => import('../add-course-page/add-course-page.module').then(mod => mod.AddCoursePageModule),
+    loadChildren: () => import('../course-page/course-page.module').then(mod => mod.AddCoursePageModule),
   },
   {
     path: ':id',
@@ -23,7 +24,10 @@ const routes: Routes = [
         routeName: 'editableCourseName',
       },
     },
-    loadChildren: () => import('../add-course-page/add-course-page.module').then(mod => mod.AddCoursePageModule),
+    resolve: {
+      title: CoursePageResolve,
+    },
+    loadChildren: () => import('../course-page/course-page.module').then(mod => mod.AddCoursePageModule),
   },
 ];
 

@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import Course from './course.types';
+import Course from '../../../../state/courses/courses.types';
 import { DeleteCourseModalComponent } from './delete-course-modal/delete-course-modal.component';
 
 @Component({

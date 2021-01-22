@@ -34,7 +34,7 @@ export class BreadcrumbsComponent implements OnInit {
     let nextUrl;
 
     const label = this.isDynamicRoute(route)
-      ? localStorage.getItem(route.routeConfig?.data?.params.routeName)
+      ? route.snapshot.data.title
       : route.routeConfig?.data?.breadcrumb;
     if (label) {
       const path = route.routeConfig?.path;
