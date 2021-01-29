@@ -35,7 +35,7 @@ export class CoursePageComponent implements OnInit, OnDestroy {
     }
     this.course$.pipe(
       takeUntil(this.destroy$),
-    ).subscribe(course => this.updatedCourse = this.isEdit ? {...course} : 
+    ).subscribe(course => this.updatedCourse = this.isEdit ? {...course} :
       { id: null, name: null, date: null, length: null, description: null });
   }
 
