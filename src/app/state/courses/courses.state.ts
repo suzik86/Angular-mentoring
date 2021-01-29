@@ -7,4 +7,6 @@ export interface CoursesState {
   sort: string;
   loading: boolean;
   filter: string;
+  selectedCourse: Course;
+  courseLoading: boolean;
 }

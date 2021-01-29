@@ -10,4 +10,5 @@ export abstract class CoursesService {
   abstract createCourse(course: Course): Observable<any>;
   abstract updateItem(course: Course): Observable<any>;
   abstract removeItem(id): Observable<any>;
+  abstract getCourse(courseId: string): Observable<Course>;
 }

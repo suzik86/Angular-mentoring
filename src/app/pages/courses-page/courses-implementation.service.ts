@@ -13,7 +13,7 @@ const BACKEND_URL = 'http://localhost:3004/';
 export class CoursesImplementationService  implements CoursesService {
   constructor(private http: HttpClient) { }
 
-  getCourses(start: number, count: number, textFragment?: string, sort?: string): Observable<Course[]> {
+  getCourses(start: number, count: number, textFragment?: string, sort = 'date'): Observable<Course[]> {
     const params = new HttpParams()
                 .set('start', start.toString())
                 .set('count', count.toString())
@@ -25,6 +25,11 @@ export class CoursesImplementationService  implements CoursesService {
 
   createCourse(course: Course): Observable<any> {
     return this.http.post(BACKEND_URL + COURSES_ENDPOINT, course);
+  }
+
+
+  getCourse(courseId: string): Observable<Course> {
+    return this.http.get<Course>(`${BACKEND_URL}${COURSES_ENDPOINT}/${courseId}`);
   }
 
   updateItem(course: Course): Observable<any> {

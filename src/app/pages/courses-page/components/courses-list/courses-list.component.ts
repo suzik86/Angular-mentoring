@@ -1,7 +1,10 @@
 import { Component, Input } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/state';
-import { LoadCoursesMoreAction } from 'src/app/state/courses/couses.actions';
+import {
+  LoadCoursesAction,
+  SetOffsetAction,
+} from 'src/app/state/courses/couses.actions';
 import Course from '../../../../state/courses/courses.types';
 
 @Component({
@@ -17,6 +20,7 @@ export class CoursesListComponent {
   ) { }
 
   loadMore(): void {
-    this.store.dispatch(LoadCoursesMoreAction());
+    this.store.dispatch(SetOffsetAction({}));
+    this.store.dispatch(LoadCoursesAction());
   }
 }

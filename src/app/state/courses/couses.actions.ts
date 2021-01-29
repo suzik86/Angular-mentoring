@@ -1,5 +1,4 @@
 import { createAction, props } from '@ngrx/store';
-import { CoursesState } from './courses.state';
 import Course from './courses.types';
 
 export const addCourse = createAction(
@@ -17,43 +16,40 @@ export const editCourse = createAction(
     props<{ course: Course }>(),
 );
 
-export const findCourse = createAction(
-    '[Courses List] Find Course',
-    props<{ courseId }>(),
-);
-
 export const LoadCoursesAction = createAction(
-  '[Courses List/API] Retrieve Courses',
+  '[Courses List/API] Load Courses Action',
 );
 
-export const SetFilterCoursesAction = createAction(
-  '[Courses List/API] Set Courses filter',
-  props<{ filter: string }>(),
-);
-
-export const FilterCoursesUpdatedAction = createAction(
-  '[Courses List/API] Courses Filter was updated',
-  props<{ state: CoursesState }>(),
-);
-
-export const CoursesListLoadedSuccessfuly = createAction(
-  '[Courses List/API] Retrieved Courses Success',
+export const CoursesListLoadedSuccessfully = createAction(
+  '[Courses List/API] Courses List Loaded Successfully',
   props<{ courses: Course[] }>(),
 );
 
 export const CoursesListLoadedFailed = createAction(
-  '[Courses List/API] Retrieved Courses Fail',
+  '[Courses List/API] Courses List Loaded Failed',
 );
 
-export const LoadCoursesMoreAction = createAction(
-  '[Courses List/API] Retrieve More Courses',
+
+export const LoadCourseAction = createAction(
+  '[Courses List/API] Load Course Action',
+  props<{id: string}>(),
 );
 
-export const CoursesListMoreLoadedSuccessfuly = createAction(
-  '[Courses List/API] Retrieved Courses More Success',
-  props<{ courses: Course[] }>(),
+export const CourseLoadedSuccessfully = createAction(
+  '[Courses List/API] Course Loaded Successfully',
+  props<{ course: Course }>(),
 );
 
-export const CoursesListMoreLoadedFailed = createAction(
-  '[Courses List/API] Retrieved Courses More Fail',
+export const CourseLoadedFailed = createAction(
+  '[Courses List/API] Course Loaded Failed',
+);
+
+export const SetFilterAction = createAction(
+  '[Courses List/API] Set Filter Action',
+  props<{filter: string}>(),
+);
+
+export const SetOffsetAction = createAction(
+  '[Courses List/API] Set Offset',
+  props<{start?: number}>(),
 );

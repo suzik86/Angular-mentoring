@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { Subject } from 'rxjs';
 import { distinctUntilChanged, debounceTime, tap } from 'rxjs/operators';
 import { AppState } from 'src/app/state';
-import { SetFilterCoursesAction } from 'src/app/state/courses/couses.actions';
+import { LoadCoursesAction, SetFilterAction, SetOffsetAction } from 'src/app/state/courses/couses.actions';
 
 @Component({
   selector: 'app-search-bar',
@@ -23,7 +23,11 @@ export class SearchBarComponent implements OnInit{
     this.subscription = this.searchTextChanged.pipe(
       debounceTime(1000),
       distinctUntilChanged(),
-      tap(search => this.store.dispatch(SetFilterCoursesAction({filter: search}))),
+      tap(search => {
+        this.store.dispatch(SetFilterAction({filter: search}));
+        this.store.dispatch(SetOffsetAction({start: 0}));
+        this.store.dispatch(LoadCoursesAction());
+      }),
      ).subscribe();
   }
 

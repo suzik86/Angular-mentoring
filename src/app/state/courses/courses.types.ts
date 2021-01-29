@@ -1,9 +1,4 @@
 export default class Course {
-  constructor(course: Course = null) {
-    if (course) {
-      Object.assign(this, course);
-    }
-  }
   id: number;
   name: string;
   date: string;
@@ -11,4 +6,10 @@ export default class Course {
   description: string;
   isTopRated?: boolean;
   authors?: any;
+}
+
+export interface QueryParams {
+  filter: string;
+  start: string;
+  count: string;
 }

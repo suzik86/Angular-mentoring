@@ -1,22 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable } from 'rxjs';
-import { Store, select } from '@ngrx/store';
+import {  Observable, Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+import { select, Store } from '@ngrx/store';
 import { AppState } from 'src/app/state';
-import { addCourse, editCourse } from 'src/app/state/courses/couses.actions';
+import { addCourse, editCourse, LoadCourseAction } from 'src/app/state/courses/couses.actions';
 import Course from '../../state/courses/courses.types';
-import { selectCourse } from '../../state/courses/courses.selectors';
+import { selectCourse, selectLoading } from '../../state/courses/courses.selectors';
 
 @Component({
   selector: 'app-course-page',
   templateUrl: './course-page.component.html',
   styleUrls: ['./course-page.component.scss'],
 })
-export class CoursePageComponent implements OnInit {
-  course$: Observable<Course>;
-  course: Course = null;
-  loading = false;
+export class CoursePageComponent implements OnInit, OnDestroy {
+  course$: Observable<Course> = this.store.pipe(select(selectCourse));
+  loading$: Observable<boolean> = this.store.pipe(select(selectLoading));
+  updatedCourse: Course;
   isEdit = false;
+  destroy$ = new Subject();
 
   constructor(
     private activatedRouter: ActivatedRoute,
@@ -26,31 +28,36 @@ export class CoursePageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const id = parseInt(this.activatedRouter.snapshot.params.id, 10);
-
-    // this.coursesService.loading.subscribe(state => this.loading = state);
+    const id = this.activatedRouter.snapshot.params.id;
     if (id) {
-      this.course$ = this.store.pipe(select(selectCourse, {id}));
       this.isEdit = true;
-      this.course$.subscribe(course => this.course = new Course(course));
-    } else {
-      this.course = new Course();
+      this.store.dispatch(LoadCourseAction({id}));
     }
+    this.course$.pipe(
+      takeUntil(this.destroy$),
+    ).subscribe(course => this.updatedCourse = this.isEdit ? {...course} : 
+      { id: null, name: null, date: null, length: null, description: null });
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+    this.isEdit = false;
   }
 
   changeDuration(newValue): void {
-    this.course.length = newValue;
+    this.updatedCourse.length = newValue;
   }
 
   changeDate(newValue): void {
-    this.course.date = newValue;
+    this.updatedCourse.date = newValue;
   }
 
   onSave(): void {
     if (this.isEdit) {
-      this.store.dispatch(editCourse({course: this.course}));
+      this.store.dispatch(editCourse({course: this.updatedCourse}));
     } else {
-      this.store.dispatch(addCourse({course: this.course}));
+      this.store.dispatch(addCourse({course: this.updatedCourse}));
     }
     this.router.navigate(['/courses']);
   }

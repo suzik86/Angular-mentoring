@@ -2,4 +2,4 @@
   <app-actions-panel></app-actions-panel>
   <app-courses-list [coursesList]="coursesList$ | async"></app-courses-list>
 </section>
-<app-spinner-overlay *ngIf='loading'></app-spinner-overlay>
+<app-spinner-overlay *ngIf='loading$ | async'></app-spinner-overlay>

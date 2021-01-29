@@ -11,7 +11,37 @@ export const selectCoursesList = createSelector(
   (state: CoursesState) => state.list,
 );
 
+export const selectLoading = createSelector(
+  selectCourses,
+  (state: CoursesState) => state.loading,
+);
+
+export const selectTextFragment = createSelector(
+  selectCourses,
+  (state: CoursesState) => state.filter,
+);
+
+export const selectCount = createSelector(
+  selectCourses,
+  (state: CoursesState) => state.count,
+);
+
+export const selectOffset = createSelector(
+  selectCourses,
+  (state: CoursesState) => state.start,
+);
+
+export const selectQueryParams = createSelector(
+  selectTextFragment, selectCount, selectOffset,
+  (filter: string, count: number, start: number) => {
+    return {
+      filter,
+      count,
+      start,
+    };
+  });
+
 export const selectCourse = createSelector(
-  selectCoursesList,
-  (list: Course[], props) => list.find((course: Course) => course.id === props.id),
+  selectCourses,
+  (state: CoursesState) => state.selectedCourse,
 );
