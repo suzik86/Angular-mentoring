@@ -3,10 +3,11 @@ import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { AddCoursePageComponent } from './add-course-page.component';
+import { CoursePageComponent } from './course-page.component';
 import { DateComponent } from './components/date/date.component';
 import { DurationComponent } from './components/duration/duration.component';
-import { AddCoursePageRoutingModule } from './add-course-page-routing.module';
+import { AddCoursePageRoutingModule } from './course-page-routing.module';
+import { CoursePageResolve } from './course.resolver';
 
 @NgModule({
   imports: [
@@ -17,12 +18,13 @@ import { AddCoursePageRoutingModule } from './add-course-page-routing.module';
     AddCoursePageRoutingModule,
   ],
   declarations: [
-    AddCoursePageComponent,
+    CoursePageComponent,
     DateComponent,
     DurationComponent,
   ],
   exports: [
-    AddCoursePageComponent,
+    CoursePageComponent,
   ],
+  providers: [CoursePageResolve],
 })
 export class AddCoursePageModule { }

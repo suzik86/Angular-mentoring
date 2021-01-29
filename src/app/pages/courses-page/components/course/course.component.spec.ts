@@ -8,7 +8,7 @@ import { DurationPipe } from '../../../../shared/pipes/duration.pipe';
 import { FilterPipe } from '../../../../shared/pipes/filter.pipe';
 import { SharedModule } from '../../../../shared/shared.module';
 import { CourseComponent } from './course.component';
-import Course from './course.types';
+import Course from '../../../../state/courses/courses.types';
 
 @Pipe({name: 'pipename'})
 class MockPipe implements PipeTransform {

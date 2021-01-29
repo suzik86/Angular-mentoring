@@ -1,12 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AddCoursePageComponent } from './add-course-page.component';
+import { CoursePageComponent } from './course-page.component';
+import { CoursePageResolve } from './course.resolver';
 
 
 const routes: Routes = [
   {
     path: '',
-    component: AddCoursePageComponent,
+    component: CoursePageComponent,
   },
 ];
 

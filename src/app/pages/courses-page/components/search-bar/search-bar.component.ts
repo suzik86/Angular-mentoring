@@ -1,7 +1,9 @@
 import { Component,  OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { Subject } from 'rxjs';
 import { distinctUntilChanged, debounceTime, tap } from 'rxjs/operators';
-import { CoursesService } from '../../courses.service';
+import { AppState } from 'src/app/state';
+import { LoadCoursesAction, SetFilterAction, SetOffsetAction } from 'src/app/state/courses/couses.actions';
 
 @Component({
   selector: 'app-search-bar',
@@ -14,18 +16,19 @@ export class SearchBarComponent implements OnInit{
   subscription;
 
   constructor(
-    public coursesService: CoursesService,
+    private store: Store<AppState>,
   ) { }
 
   ngOnInit(): void {
     this.subscription = this.searchTextChanged.pipe(
       debounceTime(1000),
       distinctUntilChanged(),
-      tap(search => this.coursesService.textFragment = this.searchValue),
-      tap(search => this.coursesService.loadAll()),
-     ).subscribe((res) => {
-       console.log(res);
-     });
+      tap(search => {
+        this.store.dispatch(SetFilterAction({filter: search}));
+        this.store.dispatch(SetOffsetAction({start: 0}));
+        this.store.dispatch(LoadCoursesAction());
+      }),
+     ).subscribe();
   }
 
  search(event): void {

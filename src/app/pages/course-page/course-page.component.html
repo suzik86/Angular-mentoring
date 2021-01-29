@@ -1,0 +1,27 @@
+<form class="form" *ngIf="updatedCourse" >
+
+  <mat-form-field appearance="outline" class="field">
+    <mat-label>Title:</mat-label>
+    <input matInput [(ngModel)]='updatedCourse.name' name='name'>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="field">
+    <mat-label>Description:</mat-label>
+    <textarea matInput placeholder="Course description" [(ngModel)]='updatedCourse.description' name='description'></textarea>
+  </mat-form-field>
+
+  <app-date [creationDate]='updatedCourse.date' (update)='changeDate($event)'></app-date>
+
+  <app-duration [duration]='updatedCourse?.length' (update)='changeDuration($event)'></app-duration>
+
+  <mat-form-field appearance="outline" class="field">
+    <mat-label>Authors:</mat-label>
+    <input matInput value="">
+  </mat-form-field>
+
+  <button mat-raised-button color="accent" (click)='onSave()'>Save</button>
+  <button mat-raised-button (click)='onCancel()'>Cancel</button>
+
+</form>
+
+<app-spinner-overlay *ngIf='loading$ | async'></app-spinner-overlay>

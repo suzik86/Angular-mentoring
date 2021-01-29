@@ -1,6 +1,8 @@
 import { Component, Inject, Optional } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { CoursesService } from '../../../courses.service';
+import { Store } from '@ngrx/store';
+import { AppState } from 'src/app/state';
+import { removeCourse } from 'src/app/state/courses/couses.actions';
 
 @Component({
   selector: 'app-delete-course-modal',
@@ -9,8 +11,8 @@ import { CoursesService } from '../../../courses.service';
 })
 export class DeleteCourseModalComponent {
   constructor(
-    private coursesService: CoursesService,
     public dialogRef: MatDialogRef<DeleteCourseModalComponent>,
+    private store: Store<AppState>,
     @Optional() @Inject(MAT_DIALOG_DATA) public data: any,
   ) { }
 
@@ -19,7 +21,7 @@ export class DeleteCourseModalComponent {
   }
 
   onDeleteCourse(id): void {
-    this.coursesService.removeItem(id);
+    this.store.dispatch(removeCourse({courseId: id}));
     this.dialogRef.close();
   }
 
